@@ -47,4 +47,12 @@ public class CarDTO {
     public void setBrand(String brand) {
         this.brand = brand;
     }
+
+    public CarDTO(int id, String numberPlate, String color, String model, String brand) {
+        this.id = id;
+        this.numberPlate = numberPlate;
+        this.color = color;
+        this.model = model;
+        this.brand = brand;
+    }
 }

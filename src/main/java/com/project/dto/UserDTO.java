@@ -71,5 +71,13 @@ public class UserDTO {
         this.userType = userType;
     }
 
-
+    public UserDTO(int id, String firstName, String lastName, String email, String password, UserType userType, Date birthDate) {
+        this.id = id;
+        this.userType = userType;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.birthDate = birthDate;
+    }
 }

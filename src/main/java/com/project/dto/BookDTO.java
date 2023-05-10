@@ -52,4 +52,12 @@ public class BookDTO {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
+
+    public BookDTO(int id, User user, Car car, LocalDate startDate, LocalDate endDate) {
+        this.id = id;
+        this.user = user;
+        this.car = car;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 }
