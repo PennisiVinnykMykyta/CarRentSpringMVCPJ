@@ -1,31 +1,58 @@
 package com.project.services.implementations;
 
+import com.project.dto.UserDTO;
 import com.project.entities.User;
+import com.project.entities.enums.UserType;
+import com.project.mappers.UserMapper;
 import com.project.repositories.UserRepository;
 import com.project.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserServiceImplementation implements UserService {
-    private UserRepository userRepository;
-    private User user;
 
-    public UserServiceImplementation(UserRepository userRepository){
-        this.userRepository = userRepository;
+   @Autowired
+   private UserRepository userRepository;
+   @Autowired
+   private UserMapper userMapper;
+   private User user;
+   private UserDTO userDTO = new UserDTO();
+
+    public String[] getUserHomepage(String email, String password){
+        user = userRepository.findByEmailAndPassword(email,password);
+        String[] viewAndError = new String[2];
+
+        if(user != null){
+            if(user.getType() == UserType.ADMIN){
+                viewAndError[0] = "adminHomepage";
+            }else{
+                viewAndError[0] = "customerHomepage";
+            }
+            viewAndError[1] = "";
+        }else{
+            viewAndError[0] = "redirect:/login";
+            viewAndError[1] = "Error: these credentials do not match any in our database!";
+        }
+        return viewAndError;
     }
 
     @Override
-    public User getUserById(int id){
+    public UserDTO getUserById(int id){
         user = userRepository.findById(id);
-        return user;
+        userDTO = userMapper.fromUserToDto(user);
+        return userDTO;
     }
 
     @Override
-    public User getUserByCredentials(String mail, String password){
+    public UserDTO getUserByCredentials(String mail, String password){
         user  = userRepository.findByEmailAndPassword(mail,password);
-        return user;
+        if(user != null){
+            userDTO = userMapper.fromUserToDto(user);
+        }
+        return userDTO;
     }
 
     public List<User> getAllUsers(){

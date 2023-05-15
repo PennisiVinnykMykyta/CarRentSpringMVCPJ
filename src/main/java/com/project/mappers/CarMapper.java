@@ -3,15 +3,14 @@ package com.project.mappers;
 import com.project.dto.CarDTO;
 import com.project.entities.Car;
 import com.project.repositories.CarRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CarMapper {
 
+    @Autowired
     private CarRepository carRepository;
-    public CarMapper(CarRepository carRepository){
-        this.carRepository = carRepository;
-    }
 
     public CarDTO fromCarToCarDTO(Car car){
         int id = car.getId();

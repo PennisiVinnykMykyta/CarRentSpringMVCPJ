@@ -1,9 +1,10 @@
 package com.project.dto;
 
+import com.project.entities.Book;
 import com.project.entities.enums.UserType;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.Date;
+import java.util.List;
 
 public class UserDTO {
 
@@ -14,6 +15,16 @@ public class UserDTO {
     private String email;
     private String password;
     private Date birthDate;
+
+    private List<Book> bookList;
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
+    }
 
     public int getId() {
         return id;
@@ -63,6 +74,9 @@ public class UserDTO {
         this.birthDate = birthDate;
     }
 
+    public UserDTO() {
+    }
+
     public UserType getUserType() {
         return userType;
     }
@@ -71,7 +85,7 @@ public class UserDTO {
         this.userType = userType;
     }
 
-    public UserDTO(int id, String firstName, String lastName, String email, String password, UserType userType, Date birthDate) {
+    public UserDTO(int id, String firstName, String lastName, String email, String password, UserType userType, Date birthDate, List<Book> bookList) {
         this.id = id;
         this.userType = userType;
         this.firstName = firstName;
@@ -79,5 +93,6 @@ public class UserDTO {
         this.email = email;
         this.password = password;
         this.birthDate = birthDate;
+        this.bookList = bookList;
     }
 }

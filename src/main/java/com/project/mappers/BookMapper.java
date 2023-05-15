@@ -5,16 +5,14 @@ import com.project.entities.Book;
 import com.project.entities.Car;
 import com.project.entities.User;
 import com.project.repositories.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 
 public class BookMapper {
 
+    @Autowired
     private BookRepository bookRepository;
-
-    public BookMapper(BookRepository bookRepository){
-        this.bookRepository = bookRepository;
-    }
 
     public BookDTO fromBookToBookDTO(Book book){
 

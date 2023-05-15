@@ -2,21 +2,21 @@ package com.project.mappers;
 
 
 import com.project.dto.UserDTO;
+import com.project.entities.Book;
 import com.project.entities.User;
 import com.project.entities.enums.UserType;
 import com.project.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class UserMapper {
 
+    @Autowired
     private UserRepository userRepository;
-
-    public UserMapper(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
 
     public UserDTO fromUserToDto(User user){
 
@@ -27,8 +27,9 @@ public class UserMapper {
         String password = user.getPassword();
         Date brithDate = user.getBirthDate();
         UserType userType = user.getType();
+        List <Book> bookList = user.getBookings();
 
-        UserDTO userDTO = new UserDTO(id,firstName,lastName,email,password,userType,brithDate);
+        UserDTO userDTO = new UserDTO(id,firstName,lastName,email,password,userType,brithDate,bookList);
 
         return userDTO;
     }
