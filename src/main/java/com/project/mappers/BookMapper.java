@@ -6,9 +6,11 @@ import com.project.entities.Car;
 import com.project.entities.User;
 import com.project.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+@Component
 public class BookMapper {
 
     @Autowired

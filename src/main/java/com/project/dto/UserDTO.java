@@ -2,9 +2,11 @@ package com.project.dto;
 
 import com.project.entities.Book;
 import com.project.entities.enums.UserType;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
+
 
 public class UserDTO {
 

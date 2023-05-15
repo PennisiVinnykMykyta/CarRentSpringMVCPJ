@@ -2,8 +2,10 @@ package com.project.dto;
 
 import com.project.entities.Car;
 import com.project.entities.User;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+
 
 public class BookDTO {
 
@@ -12,6 +14,16 @@ public class BookDTO {
     private Car car;
     private LocalDate startDate;
     private LocalDate endDate;
+
+    private Boolean valid;
+
+    public Boolean getValid() {
+        return valid;
+    }
+
+    public void setValid(Boolean valid) {
+        this.valid = valid;
+    }
 
     public int getId() {
         return id;
@@ -53,8 +65,17 @@ public class BookDTO {
         this.endDate = endDate;
     }
 
+    public BookDTO(){}
+
     public BookDTO(int id, User user, Car car, LocalDate startDate, LocalDate endDate) {
         this.id = id;
+        this.user = user;
+        this.car = car;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public BookDTO(User user, Car car, LocalDate startDate, LocalDate endDate) {
         this.user = user;
         this.car = car;
         this.startDate = startDate;

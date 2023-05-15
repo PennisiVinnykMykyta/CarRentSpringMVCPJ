@@ -9,6 +9,10 @@ import com.project.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -55,18 +59,74 @@ public class UserServiceImplementation implements UserService {
         return userDTO;
     }
 
-    public List<User> getAllUsers(){
+    public List<UserDTO> getAllUsers(){ //CHANGE TO LIST DTO
+
         List<User> userList = userRepository.findAll();
-        return  userList;
+        List<UserDTO> userDTOList = new ArrayList<>();
+        for(User user : userList){
+            userDTO = userMapper.fromUserToDto(user);
+            userDTOList.add(userDTO);
+        }
+        return  userDTOList;
     }
 
-    public void deleteUserById(int id){
-        userRepository.deleteById(id);
+    public String deleteUserById(int deleteID){
+
+        userRepository.deleteById(deleteID);
+
+        return "userList";
     }
 
-    public void saveOrUpdateUser(User user){
+    public String saveOrUpdateUser(int userID, int userToChangeID,String firstName, String lastName, String email, String password, String dateString,String typeUser)
+    {
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date;
+        try {
+            date = simpleDateFormat.parse(dateString);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        UserType type;
+
+        switch (typeUser){
+            case "customer":
+                type = UserType.CUSTOMER;
+                break;
+
+            case "admin":
+                type = UserType.ADMIN;
+                break;
+
+            default: //if user type is null that means we are changing some details
+
+                if(userID == userToChangeID){//means user is changing info about themselves
+                    user = userRepository.findById(userToChangeID);
+                    type = user.getType();
+                }else{//a user is changing another users info
+                    User changeUser = userRepository.findById(userToChangeID);
+                    type = changeUser.getType();
+                }
+
+                user = new User(userToChangeID,email,password,firstName,lastName,type,date);
+
+                userRepository.saveOrUpdateUser(user);
+
+                user = userRepository.findById(userID);
+
+                userDTO = userMapper.fromUserToDto(user);
+
+                if(user.getType() == UserType.ADMIN){
+                    return "adminHomepage";
+                }else{
+                    return "customerHomepage";
+                }
+        }
+        user = new User(email,password,firstName,lastName,type,date);
         userRepository.saveOrUpdateUser(user);
-    }
 
+        return "adminHomepage"; //we know it's an admin homepage for sure cos only the admin can add new users
+    }
 
 }

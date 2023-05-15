@@ -1,5 +1,8 @@
 package com.project.dto;
 
+import org.springframework.stereotype.Component;
+
+
 public class CarDTO {
 
     private int id;
