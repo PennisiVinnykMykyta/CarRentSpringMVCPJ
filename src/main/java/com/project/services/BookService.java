@@ -18,6 +18,6 @@ public interface BookService {
     List<BookDTO> findAllUserBooks(int id);
     String checkDates(String startDate, String endDate);
 
-    String bookController(String error);
+    String errorCheck(String error);
 
 }

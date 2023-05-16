@@ -52,6 +52,7 @@ public class BookController {
     public String bookForm(HttpServletRequest request, Model model){
         UserDTO userDTO = userService.getUserById(Integer.parseInt(request.getParameter("userID")));
         model.addAttribute("user", userDTO);
+        model.addAttribute("bookID",request.getParameter("bookID"));
 
         return "addBook";
     }
@@ -73,8 +74,9 @@ public class BookController {
 
        List<CarDTO> availableCars = bookService.getConflictingBookings(startDate, endDate);
        model.addAttribute("carList",availableCars);
+       model.addAttribute("bookID",request.getParameter("bookID"));
 
-        return bookService.bookController(error);
+        return bookService.errorCheck(error);
 
     }
 

@@ -16,6 +16,7 @@ ${error}
     <input type="date" name="endDate" />
     <br><br>
     <input type="hidden" name="userID"  value="${user.id}">
+    <input type="hidden" name="bookID"  value="${bookID}">
     <input type="submit" value="Continue">
 </form>
 

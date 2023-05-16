@@ -53,7 +53,8 @@ public class BookServiceImplementation implements BookService {
         }
     }
 
-    public String bookController(String error){
+    @Override
+    public String errorCheck(String error){
         if(error.equals("")){
             return "availableCars";
         }else{
@@ -138,13 +139,9 @@ public class BookServiceImplementation implements BookService {
         LocalDate end = LocalDate.parse(endDate);
 
         //int id = Integer.parseInt(bookID);
-        if(!bookID.equalsIgnoreCase("NO")){
-            int id = Integer.parseInt(bookID);
-            book = new Book(id,user,car,start,end);
-        }
-        else{
-            book = new Book(user,car,start,end);
-        }
+        Integer id = Integer.parseInt(bookID);
+        book = new Book(id,user,car,start,end);
+
 
         bookRepository.saveOrUpdateBook(book);
     }
