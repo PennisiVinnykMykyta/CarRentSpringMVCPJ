@@ -5,8 +5,6 @@ import com.project.dto.UserDTO;
 import com.project.entities.Book;
 import com.project.entities.User;
 import com.project.entities.enums.UserType;
-import com.project.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -14,9 +12,6 @@ import java.util.List;
 
 @Component
 public class UserMapper {
-
-    @Autowired
-    private UserRepository userRepository;
 
     public UserDTO fromUserToDto(User user){
 
@@ -29,9 +24,8 @@ public class UserMapper {
         UserType userType = user.getType();
         List <Book> bookList = user.getBookings();
 
-        UserDTO userDTO = new UserDTO(id,firstName,lastName,email,password,userType,brithDate,bookList);
+        return new UserDTO(id,firstName,lastName,email,password,userType,brithDate,bookList);
 
-        return userDTO;
     }
 
     public User fromDtoToUser(UserDTO userDTO){
@@ -44,9 +38,7 @@ public class UserMapper {
         Date brithDate = userDTO.getBirthDate();
         UserType userType = userDTO.getUserType();
 
-        User user = new User(id,firstName,lastName,email,password,userType,brithDate);
-
-        return user;
+        return new User(id,firstName,lastName,email,password,userType,brithDate);
 
     }
 

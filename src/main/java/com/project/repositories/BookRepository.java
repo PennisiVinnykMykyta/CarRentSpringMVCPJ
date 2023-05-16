@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface BookRepository {
 
-    public void deleteById(int id);
-    public void saveOrUpdateBook(Book book);
-    public Book findById(int id);
-    public List<Book> findAll();
-    public List<Book> conflictingBookings(LocalDate start, LocalDate end);
+    void deleteById(int id);
+    void saveOrUpdateBook(Book book);
+    Book findById(int id);
+    List<Book> findAll();
+    List<Book> conflictingBookings(LocalDate start, LocalDate end);
 }

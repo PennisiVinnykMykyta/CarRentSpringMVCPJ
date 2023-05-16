@@ -9,14 +9,14 @@ import java.util.List;
 
 public interface BookService {
 
-    public BookDTO findBookById(int id);
-    public List<BookDTO> findAllBooks();
-    public List<CarDTO> getConflictingBookings(String startDate, String endDate);
-    public void deleteById(int id);
-    public void saveOrUpdateBook(Book book);
-    public List<BookDTO> findAllUserBooks(int id);
-    public String checkDates(String startDate, String endDate);
+    BookDTO findBookById(int id);
+    List<BookDTO> findAllBooks();
+    List<CarDTO> getConflictingBookings(String startDate, String endDate);
+    void deleteById(int id);
+    void saveOrUpdateBook(Book book);
+    List<BookDTO> findAllUserBooks(int id);
+    String checkDates(String startDate, String endDate);
 
-    public String bookController(String error);
+    String bookController(String error);
 
 }

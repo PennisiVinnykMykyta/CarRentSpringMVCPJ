@@ -2,7 +2,6 @@ package com.project.controllers;
 
 
 import com.project.dto.UserDTO;
-import com.project.entities.User;
 import com.project.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,15 +21,13 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    UserDTO userDTO;
-
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public String deleteUser(HttpServletRequest request, Model model){
         int userID = Integer.parseInt(request.getParameter("userID"));
         int deleteID = Integer.parseInt(request.getParameter("deleteID"));
         String page = userService.deleteUserById(deleteID);
 
-        userDTO = userService.getUserById(userID);
+        UserDTO userDTO = userService.getUserById(userID);
         model.addAttribute("user",userDTO);
         List<UserDTO> userList = userService.getAllUsers();
         model.addAttribute("userList", userList);
@@ -41,7 +38,7 @@ public class UserController {
     @RequestMapping(value ="/userList", method = RequestMethod.GET)
     public String userList(HttpServletRequest request, Model model){
         int userID = Integer.parseInt(request.getParameter("userID"));
-        userDTO = userService.getUserById(userID);
+        UserDTO userDTO = userService.getUserById(userID);
         List<UserDTO> userList = userService.getAllUsers();
         model.addAttribute("user",userDTO);
         model.addAttribute("userList",userList);
@@ -51,7 +48,7 @@ public class UserController {
     @RequestMapping(value = "/addUser", method = RequestMethod.GET)
     public String addUser(HttpServletRequest request, Model model){
         int userID = Integer.parseInt(request.getParameter("userID"));
-        userDTO = userService.getUserById(userID);
+        UserDTO userDTO = userService.getUserById(userID);
         model.addAttribute("user",userDTO);
         return "addUser";
     }
@@ -59,16 +56,16 @@ public class UserController {
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(HttpServletRequest request, Model model){
         int userID = Integer.parseInt(request.getParameter("userID"));
-        userDTO = userService.getUserById(userID);
+        UserDTO userDTO = userService.getUserById(userID);
         model.addAttribute("user",userDTO);
         return "showProfile";
     }
 
     @RequestMapping(value = "/changeProfile", method = RequestMethod.POST)
     public String changeProfile(HttpServletRequest request, Model model){
-        int id = Integer.parseInt(request.getParameter("userID")); //se stiamo modifcando il nostro profilo entrambi gli id coincidono
+        int userID = Integer.parseInt(request.getParameter("userID")); //se stiamo modifcando il nostro profilo entrambi gli id coincidono
         int userToChangeID = Integer.parseInt(request.getParameter("userToChangeID"));
-        userDTO = userService.getUserById(id);
+        UserDTO userDTO = userService.getUserById(userID);
         UserDTO userToChangeDTO = userService.getUserById(userToChangeID);
         model.addAttribute("user",userDTO);
         model.addAttribute("userToChange",userToChangeDTO);
@@ -85,7 +82,7 @@ public class UserController {
         String direction = viewAndError[0];
         String error = viewAndError[1];
 
-        userDTO = userService.getUserByCredentials(email, password);
+        UserDTO userDTO = userService.getUserByCredentials(email, password);
 
         model.addAttribute("user", userDTO);
         redirectAttributes.addAttribute("error",error);
@@ -114,7 +111,7 @@ public class UserController {
 
         String homepage = userService.saveOrUpdateUser(userID,userToChangeID,firstName,lastName,email,password,dateForm,type);
 
-        userDTO = userService.getUserById(userID);
+        UserDTO userDTO = userService.getUserById(userID);
         model.addAttribute("user",userDTO);
 
         return homepage;

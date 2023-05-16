@@ -5,10 +5,10 @@ import java.util.List;
 
 public interface UserRepository{
 
-    public void deleteById(int id);
-    public void saveOrUpdateUser(User user);
-    public List<User> findAll();
-    public User findById(int id);
-    public User findByEmailAndPassword(String email, String password);
+    void deleteById(int id);
+    void saveOrUpdateUser(User user);
+    List<User> findAll();
+    User findById(int id);
+    User findByEmailAndPassword(String email, String password);
 
 }

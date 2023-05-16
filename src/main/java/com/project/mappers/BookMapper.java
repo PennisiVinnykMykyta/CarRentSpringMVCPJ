@@ -1,11 +1,11 @@
 package com.project.mappers;
 
 import com.project.dto.BookDTO;
+import com.project.dto.CarDTO;
+import com.project.dto.UserDTO;
 import com.project.entities.Book;
 import com.project.entities.Car;
 import com.project.entities.User;
-import com.project.repositories.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -13,10 +13,9 @@ import java.time.LocalDate;
 @Component
 public class BookMapper {
 
-    @Autowired
-    private BookRepository bookRepository;
-
     public BookDTO fromBookToBookDTO(Book book){
+        CarMapper carMapper = new CarMapper();
+        UserMapper userMapper = new UserMapper();
 
         int id = book.getId();
         LocalDate startDate = book.getStartDate();
@@ -24,22 +23,10 @@ public class BookMapper {
         User user = book.getUser();
         Car car = book.getCar();
 
-        BookDTO bookDTO = new BookDTO(id,user,car,startDate,endDate);
+        UserDTO userDTO = userMapper.fromUserToDto(user);
+        CarDTO carDTO =  carMapper.fromCarToCarDTO(car);
 
-        return  bookDTO;
+        return new BookDTO(id,userDTO,carDTO,startDate,endDate);
 
-
-    }
-
-    public Book fromBookDTOToBook(BookDTO bookDTO){
-        int id = bookDTO.getId();
-        LocalDate startDate = bookDTO.getStartDate();
-        LocalDate endDate = bookDTO.getEndDate();
-        User user = bookDTO.getUser();
-        Car car = bookDTO.getCar();
-
-        Book book = new Book(id,user,car,startDate,endDate);
-
-        return  book;
     }
 }

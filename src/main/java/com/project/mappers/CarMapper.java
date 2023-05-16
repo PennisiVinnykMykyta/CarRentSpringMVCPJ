@@ -2,15 +2,10 @@ package com.project.mappers;
 
 import com.project.dto.CarDTO;
 import com.project.entities.Car;
-import com.project.repositories.CarRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CarMapper {
-
-    @Autowired
-    private CarRepository carRepository;
 
     public CarDTO fromCarToCarDTO(Car car){
         int id = car.getId();
@@ -19,8 +14,8 @@ public class CarMapper {
         String model = car.getModel();
         String brand = car.getBrand();
 
-        CarDTO carDTO = new CarDTO(id,numberPlate,color,model,brand);
-        return  carDTO;
+        return new CarDTO(id,numberPlate,color,model,brand);
+
     }
 
     public Car fromCarDTOToCar(CarDTO carDTO){
@@ -30,7 +25,6 @@ public class CarMapper {
         String model = carDTO.getModel();
         String brand = carDTO.getBrand();
 
-        Car car = new Car(id,numberPlate,color,model,brand);
-        return  car;
+        return new Car(id,numberPlate,color,model,brand);
     }
 }

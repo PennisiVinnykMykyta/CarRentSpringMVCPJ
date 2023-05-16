@@ -1,17 +1,13 @@
 package com.project.dto;
 
-import com.project.entities.Car;
-import com.project.entities.User;
-import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 
 
 public class BookDTO {
 
     private int id;
-    private User user;
-    private Car car;
+    private UserDTO user;
+    private CarDTO car;
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -33,19 +29,19 @@ public class BookDTO {
         this.id = id;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
-    public Car getCar() {
+    public CarDTO getCar() {
         return car;
     }
 
-    public void setCar(Car car) {
+    public void setCar(CarDTO car) {
         this.car = car;
     }
 
@@ -67,7 +63,7 @@ public class BookDTO {
 
     public BookDTO(){}
 
-    public BookDTO(int id, User user, Car car, LocalDate startDate, LocalDate endDate) {
+    public BookDTO(int id, UserDTO user, CarDTO car, LocalDate startDate, LocalDate endDate) {
         this.id = id;
         this.user = user;
         this.car = car;
@@ -75,7 +71,7 @@ public class BookDTO {
         this.endDate = endDate;
     }
 
-    public BookDTO(User user, Car car, LocalDate startDate, LocalDate endDate) {
+    public BookDTO(UserDTO user, CarDTO car, LocalDate startDate, LocalDate endDate) {
         this.user = user;
         this.car = car;
         this.startDate = startDate;

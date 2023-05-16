@@ -5,10 +5,10 @@ import java.util.List;
 
 public interface CarRepository {
 
-    public void deleteById(int id);
-    public void saveOrUpdateCar(Car car);
-    public List<Car> findAll();
-    public Car findById(int id);
-    public List<Car> availableCars(List<Integer> BookedCars);
+    void deleteById(int id);
+    void saveOrUpdateCar(Car car);
+    List<Car> findAll();
+    Car findById(int id);
+    List<Car> availableCars(List<Integer> BookedCars);
 
 }

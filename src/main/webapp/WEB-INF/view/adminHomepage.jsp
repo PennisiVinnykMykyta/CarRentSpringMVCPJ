@@ -36,10 +36,8 @@
             </form>
         </td>
         <td>
-            <form action="user" method="GET">
-                <input type="hidden" name="command" value="addPage" />
+            <form action="/SpringMVCPJ_war_exploded/car/addCar" method="GET">
                 <input type="hidden" name="userID" value="${user.id}" />
-                <input type="hidden" name="object" value="car" />
                 <input type="submit" value="Register New Car">
             </form>
         </td>

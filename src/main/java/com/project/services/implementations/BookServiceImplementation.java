@@ -3,11 +3,9 @@ package com.project.services.implementations;
 import com.project.dto.BookDTO;
 import com.project.dto.CarDTO;
 import com.project.entities.Book;
-import com.project.entities.Car;
 import com.project.entities.User;
 import com.project.mappers.BookMapper;
 import com.project.repositories.BookRepository;
-import com.project.repositories.CarRepository;
 import com.project.repositories.UserRepository;
 import com.project.services.BookService;
 import com.project.services.CarService;
@@ -31,8 +29,6 @@ public class BookServiceImplementation implements BookService {
     private BookDTO bookDTO = new BookDTO();
     @Autowired
     private UserRepository userRepository;
-    private Book book;
-    private User user;
 
     public String checkDates(String start, String end){
 
@@ -61,14 +57,13 @@ public class BookServiceImplementation implements BookService {
         }
     }
 
-    public BookServiceImplementation(BookRepository bookRepository){
-        this.bookRepository=bookRepository;
+    public BookServiceImplementation(){
     }
 
 
     @Override
     public List<BookDTO> findAllUserBooks(int userID){
-        user = userRepository.findById(userID);
+        User user = userRepository.findById(userID);
         List<Book> bookList = user.getBookings();
         List<BookDTO> bookDTOList = new ArrayList<>();
         for(Book book : bookList){
@@ -79,7 +74,7 @@ public class BookServiceImplementation implements BookService {
     }
     @Override
     public BookDTO findBookById(int id){
-        book = bookRepository.findById(id);
+        Book book = bookRepository.findById(id);
         bookDTO = bookMapper.fromBookToBookDTO(book);
         return bookDTO;
     }
@@ -104,7 +99,6 @@ public class BookServiceImplementation implements BookService {
             LocalDate endDate = LocalDate.parse(end);
 
             List<Book> conflictingBookings = bookRepository.conflictingBookings(startDate,endDate);
-            List<BookDTO> bookDTOList = new ArrayList<>();
 
             int carID;
             List<Integer> bookedCarsIDS = new ArrayList<>();

@@ -1,16 +1,33 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Nikit
-  Date: 12/05/2023
-  Time: 11:07
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Add Car</title>
 </head>
 <body>
+
+<h3>Compile the form below to add a new car to the list:</h3>
+
+<form action="./saveOrChangeCar" method="POST">
+    <input type="hidden" name="userID" value="${user.id}" />
+    <input type="hidden" name="carID" value ="{car.id}" />
+
+    Model: <input type = "text" name="model" />
+    <br><br>
+    Brand: <input type = "text" name="brand" />
+    <br><br>
+    Color: <input type = "text" name="color" />
+    <br><br>
+    NumberPlate: <input type = "text" name="plate" />
+    <br><br>
+    <input type="submit" value="Add New Car"/>
+
+</form>
+
+<form method="GET" name="revert" action="/SpringMVCPJ_war_exploded/user/homepage" >
+    <input type="hidden" name="email" value="${user.email}" />
+    <input type="hidden" name="password" value="${user.password}" />
+    <input type="submit" value="Cancel" />
+</form>
 
 </body>
 </html>

@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface CarService {
 
-    public Car findCarById(int id);
-    public List<Car> findAllCars();
-    public List<CarDTO> availableCars(List<Integer> BookedCars);
-    public void deleteById(int id);
-    public void saveOrUpdateCar(Car car);
+    Car findCarById(int id);
+    List<Car> findAllCars();
+    List<CarDTO> availableCars(List<Integer> BookedCars);
+    void deleteById(int id);
+    void saveOrUpdateCar(String carID,String model,String brand, String color, String numberPlate);
 }
