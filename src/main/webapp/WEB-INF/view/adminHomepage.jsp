@@ -56,15 +56,13 @@
             </form>
         </td>
         <td>
-            <form action="car" method="GET">
-                <input type="hidden" name="command" value="carList" />
+            <form action="/SpringMVCPJ_war_exploded/car/carList" method="GET">
                 <input type="hidden" name="userID" value="${user.id}" />
                 <input type="submit" value="View Car List">
             </form>
         </td>
         <td>
-            <form action="book" method="GET">
-                <input type="hidden" name="command" value="bookList" />
+            <form action="/SpringMVCPJ_war_exploded/book/globalBookList" method="GET">
                 <input type="hidden" name="userID" value="${user.id}" />
                 <input type="submit" value="View Booking List">
             </form>

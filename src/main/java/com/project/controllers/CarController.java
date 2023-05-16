@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/car")
@@ -22,6 +23,39 @@ public class CarController {
     @Autowired
     private CarService carService;
 
+
+    @GetMapping(value = "/changeCar")
+    public String changeCar(HttpServletRequest request, Model model){
+        UserDTO userDTO = userService.getUserById(Integer.parseInt(request.getParameter("userID")));
+        model.addAttribute("user",userDTO);
+
+        CarDTO carDTO = carService.findCarById(Integer.parseInt(request.getParameter("carID")));
+        model.addAttribute("car",carDTO);
+
+        return "changeCar";
+    }
+    @PostMapping(value = "/delete")
+    public String deleteCar(HttpServletRequest request, Model model){
+        UserDTO userDTO = userService.getUserById(Integer.parseInt(request.getParameter("userID")));
+        model.addAttribute("user",userDTO);
+        int carID = Integer.parseInt(request.getParameter("deleteID"));
+        carService.deleteById(carID);
+
+        List<CarDTO> carList = carService.findAllCars();
+        model.addAttribute("carList",carList);
+
+        return "carList";
+    }
+    @GetMapping(value ="/carList")
+    public String carList(HttpServletRequest request, Model model){
+        UserDTO userDTO = userService.getUserById(Integer.parseInt(request.getParameter("userID")));
+        model.addAttribute("user",userDTO);
+
+        List<CarDTO> carList = carService.findAllCars();
+        model.addAttribute("carList", carList);
+
+        return "carList";
+    }
     @GetMapping(value="/addCar")
     public String addCarForm(HttpServletRequest request, Model model){
         UserDTO userDTO = new UserDTO();

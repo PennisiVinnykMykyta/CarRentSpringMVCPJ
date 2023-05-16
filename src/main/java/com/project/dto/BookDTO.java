@@ -63,18 +63,20 @@ public class BookDTO {
 
     public BookDTO(){}
 
-    public BookDTO(int id, UserDTO user, CarDTO car, LocalDate startDate, LocalDate endDate) {
+    public BookDTO(int id, UserDTO user, CarDTO car, LocalDate startDate, LocalDate endDate, Boolean valid) {
         this.id = id;
         this.user = user;
         this.car = car;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.valid = valid;
     }
 
-    public BookDTO(UserDTO user, CarDTO car, LocalDate startDate, LocalDate endDate) {
+    public BookDTO(UserDTO user, CarDTO car, LocalDate startDate, LocalDate endDate,Boolean valid) {
         this.user = user;
         this.car = car;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.valid = valid;
     }
 }

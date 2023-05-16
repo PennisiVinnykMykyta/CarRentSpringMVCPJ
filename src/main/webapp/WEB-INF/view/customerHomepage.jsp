@@ -16,7 +16,7 @@
         </form>
     </tr>
     <tr>
-        <form method="GET" action="./book">
+        <form method="GET" action="/SpringMVCPJ_war_exploded/book/addBook">
             <input type="hidden" name="userID" value="${user.id}"/>
             <input type="submit" value="Make a New Booking">
         </form>
@@ -86,15 +86,14 @@
                     ${book.valid}
             </td>
             <td>
-                <form action="book" method="POST">
-                    <input type="hidden" name="command" value="addOrChangeBooking"/> //cal book controller
+                <form action="/SpringMVCPJ_war_exploded/book/addBook" method="GET">
+                    <input type="hidden" name="command" value="addOrChangeBooking"/>
                     <input type="hidden" name="userID" value="${user.id}"/>
                     <input type="hidden" name="bookID" value="${book.id}">
                     <input type="submit" value="Modify Booking">
                 </form>
 
-                <form action="book" method="POST"> //call book controller
-                    <input type="hidden" name="command" value="delete" />
+                <form action="/SpringMVCPJ_war_exploded/book/deleteLocal" method="POST">
                     <input type="hidden" name="userID" value="${user.id}" />
                     <input type="hidden" name="deleteID" value="${book.id}">
                     <input type="submit" value="Delete Booking">

@@ -22,11 +22,12 @@ public class BookMapper {
         LocalDate endDate = book.getEndDate();
         User user = book.getUser();
         Car car = book.getCar();
+        Boolean valid = book.getValid();
 
         UserDTO userDTO = userMapper.fromUserToDto(user);
         CarDTO carDTO =  carMapper.fromCarToCarDTO(car);
 
-        return new BookDTO(id,userDTO,carDTO,startDate,endDate);
+        return new BookDTO(id,userDTO,carDTO,startDate,endDate,valid);
 
     }
 }

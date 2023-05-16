@@ -58,13 +58,13 @@
                     ${book.valid}
             </td>
             <td>
-                <form action="book" method="POST"> // modify
+                <form action="/SpringMVCPJ_war_exploded/book/addBook" method="GET">
                     <input type="hidden" name="userID" value="${user.id}"/>
                     <input type="hidden" name="bookID" value="${book.id}">
                     <input type="submit" value="Modify Booking">
                 </form>
 
-                <form action="book" method="POST"> //delete
+                <form action="./deleteLocal" method="POST">
                     <input type="hidden" name="userID" value="${user.id}"/>
                     <input type="hidden" name="deleteID" value="${book.id}">
                     <input type="submit" value="Delete Booking">

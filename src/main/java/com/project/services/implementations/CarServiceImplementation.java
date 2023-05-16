@@ -23,11 +23,20 @@ public class CarServiceImplementation implements CarService {
         this.carRepository = userRepository;
     }
 
-    public Car findCarById(int id){
-        return carRepository.findById(id);
+    public CarDTO findCarById(int id){
+        Car car = carRepository.findById(id);
+
+        return carMapper.fromCarToCarDTO(car);
     }
-    public List<Car> findAllCars(){
-        return carRepository.findAll();
+    public List<CarDTO> findAllCars(){
+        List<Car> carList = carRepository.findAll();
+        List<CarDTO> carDTOList = new ArrayList<>();
+        CarDTO carDTO;
+        for(Car car : carList){
+            carDTO = carMapper.fromCarToCarDTO(car);
+            carDTOList.add(carDTO);
+        }
+        return  carDTOList;
     }
     public List<CarDTO> availableCars(List<Integer> bookedCars){
         List<Car> availableCarList = carRepository.availableCars(bookedCars);
@@ -39,6 +48,7 @@ public class CarServiceImplementation implements CarService {
         return  carList;
     }
     public void deleteById(int id){
+
         carRepository.deleteById(id);
     }
     public void saveOrUpdateCar(String carID,String model,String brand, String color, String numberPlate){

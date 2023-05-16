@@ -1,12 +1,14 @@
 package com.project.mappers;
 
 
+import com.project.dto.BookDTO;
 import com.project.dto.UserDTO;
 import com.project.entities.Book;
 import com.project.entities.User;
 import com.project.entities.enums.UserType;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

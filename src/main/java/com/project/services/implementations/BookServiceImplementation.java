@@ -3,9 +3,11 @@ package com.project.services.implementations;
 import com.project.dto.BookDTO;
 import com.project.dto.CarDTO;
 import com.project.entities.Book;
+import com.project.entities.Car;
 import com.project.entities.User;
 import com.project.mappers.BookMapper;
 import com.project.repositories.BookRepository;
+import com.project.repositories.CarRepository;
 import com.project.repositories.UserRepository;
 import com.project.services.BookService;
 import com.project.services.CarService;
@@ -25,6 +27,8 @@ public class BookServiceImplementation implements BookService {
     private BookMapper bookMapper;
     @Autowired
     CarService carService;
+    @Autowired
+    CarRepository carRepository;
 
     private BookDTO bookDTO = new BookDTO();
     @Autowired
@@ -113,12 +117,35 @@ public class BookServiceImplementation implements BookService {
     }
 
     @Override
+    public void acceptBooking(int id){
+        Book book = bookRepository.findById(id);
+        book.setValid(true);
+        bookRepository.saveOrUpdateBook(book);
+
+    }
+
+    @Override
     public void deleteById(int id){
         bookRepository.deleteById(id);
     }
 
     @Override
-    public void saveOrUpdateBook(Book book){
+    public void saveOrUpdateBook(int userID,int carID,String bookID, String startDate,String endDate){
+        Book book;
+        User user = userRepository.findById(userID);
+        Car car = carRepository.findById(carID);
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+
+        //int id = Integer.parseInt(bookID);
+        if(!bookID.equalsIgnoreCase("NO")){
+            int id = Integer.parseInt(bookID);
+            book = new Book(id,user,car,start,end);
+        }
+        else{
+            book = new Book(user,car,start,end);
+        }
+
         bookRepository.saveOrUpdateBook(book);
     }
 }

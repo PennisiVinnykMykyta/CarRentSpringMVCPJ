@@ -10,7 +10,7 @@ ${error}
 
 <form action="./selectCar" method="POST">
     Start Date:
-    <input type="date" name="startDate" />
+    <input type="date" name="startDate"  />
     <br><br>
     End Date:
     <input type="date" name="endDate" />

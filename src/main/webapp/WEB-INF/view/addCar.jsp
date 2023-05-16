@@ -7,9 +7,9 @@
 
 <h3>Compile the form below to add a new car to the list:</h3>
 
-<form action="./saveOrChangeCar" method="POST">
+<form action="./addOrChangeCar" method="POST">
     <input type="hidden" name="userID" value="${user.id}" />
-    <input type="hidden" name="carID" value ="{car.id}" />
+    <input type="hidden" name="carID" />
 
     Model: <input type = "text" name="model" />
     <br><br>

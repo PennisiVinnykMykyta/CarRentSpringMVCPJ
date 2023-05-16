@@ -11,9 +11,10 @@ public interface BookService {
 
     BookDTO findBookById(int id);
     List<BookDTO> findAllBooks();
+    public void acceptBooking(int id);
     List<CarDTO> getConflictingBookings(String startDate, String endDate);
     void deleteById(int id);
-    void saveOrUpdateBook(Book book);
+    void saveOrUpdateBook(int userID,int carID,String bookID, String startDate,String endDate);
     List<BookDTO> findAllUserBooks(int id);
     String checkDates(String startDate, String endDate);
 
