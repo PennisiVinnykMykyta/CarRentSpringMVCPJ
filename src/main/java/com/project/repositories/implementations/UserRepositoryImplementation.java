@@ -15,6 +15,15 @@ import javax.persistence.Query;
 public class UserRepositoryImplementation implements UserRepository {
 
     @Override
+    public User findByEmail(String email){
+        try(Session session = HibernateUtilConfig.getSessionFactory().openSession()){
+            return  session.createQuery("SELECT s from User s where s.email = :email ",User.class)
+                    .setParameter("email",email).getSingleResult();
+        }catch(NoResultException exception){
+            return null;
+        }
+    }
+    @Override
     public void deleteById(int id){ //delete a user with a specific id
         Transaction transaction = null;
         try (Session session = HibernateUtilConfig.getSessionFactory().openSession()){

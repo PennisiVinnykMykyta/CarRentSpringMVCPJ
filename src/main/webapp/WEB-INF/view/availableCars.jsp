@@ -47,6 +47,7 @@
                     <input type="hidden" name="carID" value="${car.id}"/>
                     <input type="hidden" name="userID" value="${user.id}"/>
                     <input type="hidden" name="bookID" value="${bookID}"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <input type="submit" value="<-- Book This Vehicle"/>
                 </form>
             </td>

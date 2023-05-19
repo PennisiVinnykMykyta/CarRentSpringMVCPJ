@@ -48,7 +48,9 @@ public class CarRepositoryImplementation implements CarRepository {
     @Override
     public List<Car> findAll() { //view all cars
         try (Session session = HibernateUtilConfig.getSessionFactory().openSession()) {
-            return session.createQuery("from Car", Car.class).list();
+            return session.createQuery("SELECT s from Car s", Car.class).list();
+        }catch (Exception e){
+            return null;
         }
     }
 

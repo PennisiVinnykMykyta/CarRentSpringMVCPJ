@@ -11,4 +11,6 @@ public interface UserRepository{
     User findById(int id);
     User findByEmailAndPassword(String email, String password);
 
+    User findByEmail(String email);
+
 }

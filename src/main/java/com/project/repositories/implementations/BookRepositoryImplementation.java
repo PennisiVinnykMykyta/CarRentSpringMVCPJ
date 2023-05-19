@@ -54,7 +54,7 @@ public class BookRepositoryImplementation implements BookRepository {
     public List<Book> findAll(){ //view all cars
         try (Session session = HibernateUtilConfig.getSessionFactory().openSession()){
             return  session.createQuery("from Book",Book.class).list();
-        }catch (NoResultException exception){
+        }catch (Exception e){
             return null;
         }
     }

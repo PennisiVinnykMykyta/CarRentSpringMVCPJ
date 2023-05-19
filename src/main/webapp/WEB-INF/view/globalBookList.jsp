@@ -63,12 +63,14 @@
                 <form action="./acceptBooking" method="POST">
                     <input type="hidden" name="userID" value="${user.id}"/>
                     <input type="hidden" name="bookID" value="${book.id}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <input type="submit" value="Accept Booking">
                 </form>
 
                 <form action="./deleteGlobal" method="POST">
                     <input type="hidden" name="userID" value="${user.id}"/>
                     <input type="hidden" name="deleteID" value="${book.id}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <input type="submit" value="Decline Booking">
                 </form>
             </td>

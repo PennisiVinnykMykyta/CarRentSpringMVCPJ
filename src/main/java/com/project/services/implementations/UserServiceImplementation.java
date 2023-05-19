@@ -7,6 +7,7 @@ import com.project.mappers.UserMapper;
 import com.project.repositories.UserRepository;
 import com.project.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -22,41 +23,33 @@ public class UserServiceImplementation implements UserService {
    private UserRepository userRepository;
    @Autowired
    private UserMapper userMapper;
-   private User user;
-   private UserDTO userDTO = new UserDTO();
+   @Autowired
+   private PasswordEncoder passwordEncoder;
 
-    public String[] getUserHomepage(String email, String password){
-        user = userRepository.findByEmailAndPassword(email,password);
-        String[] viewAndError = new String[2];
+   @Override
+    public String getUserHomepage(String email){
+        User user = userRepository.findByEmail(email);
 
-        if(user != null){
-            if(user.getType() == UserType.ADMIN){
-                viewAndError[0] = "adminHomepage";
-            }else{
-                viewAndError[0] = "customerHomepage";
-            }
-            viewAndError[1] = "";
+        if(user.getType() == UserType.ADMIN){
+            return  "adminHomepage";
         }else{
-            viewAndError[0] = "redirect:/login";
-            viewAndError[1] = "Error: these credentials do not match any in our database!";
+            return  "customerHomepage";
         }
-        return viewAndError;
     }
 
     @Override
     public UserDTO getUserById(int id){
-        user = userRepository.findById(id);
-        userDTO = userMapper.fromUserToDto(user);
-        return userDTO;
+        User user = userRepository.findById(id);
+        return userMapper.fromUserToDto(user);
     }
 
     @Override
-    public UserDTO getUserByCredentials(String mail, String password){
-        user  = userRepository.findByEmailAndPassword(mail,password);
+    public UserDTO getUserByCredentials(String mail){
+        User user  = userRepository.findByEmail(mail);
         if(user != null){
-            userDTO = userMapper.fromUserToDto(user);
+            return userMapper.fromUserToDto(user);
         }
-        return userDTO;
+        return null;
     }
 
     public List<UserDTO> getAllUsers(){ //CHANGE TO LIST DTO
@@ -64,7 +57,7 @@ public class UserServiceImplementation implements UserService {
         List<User> userList = userRepository.findAll();
         List<UserDTO> userDTOList = new ArrayList<>();
         for(User user : userList){
-            userDTO = userMapper.fromUserToDto(user);
+            UserDTO userDTO = userMapper.fromUserToDto(user);
             userDTOList.add(userDTO);
         }
         return  userDTOList;
@@ -79,6 +72,7 @@ public class UserServiceImplementation implements UserService {
 
     public String saveOrUpdateUser(int userID, int userToChangeID,String firstName, String lastName, String email, String password, String dateString,String typeUser)
     {
+        User user;
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date;
@@ -89,6 +83,7 @@ public class UserServiceImplementation implements UserService {
         }
 
         UserType type;
+        password = passwordEncoder.encode(password);
 
         switch (typeUser){
             case "customer":
@@ -114,8 +109,6 @@ public class UserServiceImplementation implements UserService {
                 userRepository.saveOrUpdateUser(user);
 
                 user = userRepository.findById(userID);
-
-                userDTO = userMapper.fromUserToDto(user);
 
                 if(user.getType() == UserType.ADMIN){
                     return "adminHomepage";

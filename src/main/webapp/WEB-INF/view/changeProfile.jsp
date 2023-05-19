@@ -15,7 +15,7 @@
     Email: <input type="text" name="email" value="${userToChange.email}">
     <br><br>
 
-    Password: <input type="text" name="password" value="${userToChange.password}">
+    Password: <input type="text" name="password" value="RE-INSERT YOUR PASSWORD OR SELECT A NEW ONE">
     <br><br>
 
     Birthday: <input type="text" name="birthDate" value="${userToChange.birthDate}">
@@ -24,6 +24,7 @@
     <input type="hidden" name ="userID" value="${user.id}">
     <input type="hidden" name="userToChangeID" value="${userToChange.id}">
     <input type="hidden" name="type" value="other">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <input type="submit" value="Save Changes">
 </form>
 

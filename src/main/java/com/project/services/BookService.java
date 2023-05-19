@@ -10,6 +10,7 @@ import java.util.List;
 public interface BookService {
 
     BookDTO findBookById(int id);
+    public void deleteAllUserBookings(int deleteID);
     List<BookDTO> findAllBooks();
     public void acceptBooking(int id);
     List<CarDTO> getConflictingBookings(String startDate, String endDate);

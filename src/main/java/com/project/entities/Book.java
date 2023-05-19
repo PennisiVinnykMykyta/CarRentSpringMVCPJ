@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 public class Book {
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
 

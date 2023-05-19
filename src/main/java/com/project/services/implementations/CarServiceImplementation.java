@@ -32,9 +32,11 @@ public class CarServiceImplementation implements CarService {
         List<Car> carList = carRepository.findAll();
         List<CarDTO> carDTOList = new ArrayList<>();
         CarDTO carDTO;
-        for(Car car : carList){
-            carDTO = carMapper.fromCarToCarDTO(car);
-            carDTOList.add(carDTO);
+        if (carList != null) {
+            for (Car car : carList) {
+                carDTO = carMapper.fromCarToCarDTO(car);
+                carDTOList.add(carDTO);
+            }
         }
         return  carDTOList;
     }

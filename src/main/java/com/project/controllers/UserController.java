@@ -2,6 +2,7 @@ package com.project.controllers;
 
 
 import com.project.dto.UserDTO;
+import com.project.services.BookService;
 import com.project.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -20,11 +22,14 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    BookService bookService;
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public String deleteUser(HttpServletRequest request, Model model){
         int userID = Integer.parseInt(request.getParameter("userID"));
         int deleteID = Integer.parseInt(request.getParameter("deleteID"));
+        bookService.deleteAllUserBookings(deleteID);
         String page = userService.deleteUserById(deleteID);
 
         UserDTO userDTO = userService.getUserById(userID);
@@ -73,28 +78,27 @@ public class UserController {
     }
 
     @GetMapping(value = "/homepage")
-    public String homepage(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
+    public String homepage(HttpServletRequest request, Principal principal, Model model, RedirectAttributes redirectAttributes) {
 
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String email =  principal.getName(); //request.getParameter("email"); for debug only!
 
-        String[] viewAndError = userService.getUserHomepage(email, password);
-        String direction = viewAndError[0];
-        String error = viewAndError[1];
+        String direction = userService.getUserHomepage(email);
 
-        UserDTO userDTO = userService.getUserByCredentials(email, password);
+        UserDTO userDTO = userService.getUserByCredentials(email);
 
         model.addAttribute("user", userDTO);
-        redirectAttributes.addAttribute("error",error);
 
         return direction;
-
     }
 
     @RequestMapping("/logout")
-    public String logOut(RedirectAttributes redirectAttributes){
-        redirectAttributes.addAttribute("error","");
-        return "redirect:/login";
+    public String logOut(){
+        return "redirect:/login?logout";
+    }
+
+    @GetMapping("/loggedIn")
+    public String test(){
+        return "loggedIn";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)

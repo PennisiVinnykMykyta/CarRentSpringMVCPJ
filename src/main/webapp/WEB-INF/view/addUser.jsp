@@ -31,6 +31,7 @@
 
     <input type="hidden" name ="userID" value="${user.id}">
     <input type="hidden" name="userToChangeID" value="${user.id}">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <input type="submit" value="Save Changes">
 </form>
 

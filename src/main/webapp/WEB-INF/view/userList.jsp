@@ -56,12 +56,14 @@
                 <form action="./changeProfile" method="POST">
                     <input type="hidden" name="userID" value="${user.id}" />
                     <input type="hidden" name="userToChangeID" value="${userEntity.id}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <input type="submit" value="Modify User">
                 </form>
 
                 <form action="./deleteUser" method="POST">
                     <input type="hidden" name="userID" value="${user.id}" />
                     <input type="hidden" name="deleteID" value="${userEntity.id}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <input type="submit" value="Delete User">
                 </form>
             </td>

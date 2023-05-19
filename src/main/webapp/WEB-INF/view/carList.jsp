@@ -63,6 +63,7 @@
                 <form action="./delete" method="POST">
                     <input type="hidden" name="userID" value="${user.id}" />
                     <input type="hidden" name="deleteID" value="${car.id}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <input type="submit" value="Delete Car">
                 </form>
             </td>

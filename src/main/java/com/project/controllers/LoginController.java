@@ -4,6 +4,7 @@ import com.project.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,14 +15,13 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    @GetMapping(value = "/")
     public String loginPage() {
-        return "login";
+        return "redirect:/user/loggedIn";
     }
 
-    @RequestMapping(value = {"/login"} ,method = RequestMethod.GET)
-    public String loginPageReload(@RequestParam("error") String error, Model model){
-        model.addAttribute("error",error);
+   @RequestMapping(value = {"/login"} ,method = RequestMethod.GET)
+    public String loginPageReload( Model model){
         return "login";
     }
 

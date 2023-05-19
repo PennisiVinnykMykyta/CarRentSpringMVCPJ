@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!doctype html>
 <html lang="en">
@@ -12,22 +13,27 @@
 
 <h1>Welcome to the CarRent Site!</h1>
 
-<br>
-<h2>${error}</h2>
-<br><br>
-
-
-<form method="GET" name="login" action="./user/homepage">
+<form method="POST" name="login" action="./login" class="form-horizontal">
     <h4>Please enter your credentials:</h4>
+    <c:if test="${param.error != null}">
+        Invalid Credentials!
+    </c:if>
+    <c:if test="${param.forbidden != null}">
+        You cannot access this page!
+    </c:if>
+    <c:if test="${param.logout != null}">
+        You have logged out!
+    </c:if>
     <table>
         Email:
-        <input type="text" name="email">
+        <input type="text" id="email" name="email" placeholder = "email" />
 
         Password:
-        <input type="text" name="password">
+        <input type="text" id="password" name="password" placeholder ="password" />
 
     </table>
     <br><br>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <input type="submit" value="Log In"/>
 
 </form>

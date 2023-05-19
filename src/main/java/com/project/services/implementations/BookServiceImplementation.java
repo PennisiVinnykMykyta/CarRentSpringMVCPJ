@@ -30,7 +30,6 @@ public class BookServiceImplementation implements BookService {
     @Autowired
     CarRepository carRepository;
 
-    private BookDTO bookDTO = new BookDTO();
     @Autowired
     private UserRepository userRepository;
 
@@ -72,7 +71,7 @@ public class BookServiceImplementation implements BookService {
         List<Book> bookList = user.getBookings();
         List<BookDTO> bookDTOList = new ArrayList<>();
         for(Book book : bookList){
-            bookDTO = bookMapper.fromBookToBookDTO(book);
+            BookDTO bookDTO = bookMapper.fromBookToBookDTO(book);
             bookDTOList.add(bookDTO);
         }
         return  bookDTOList;
@@ -80,17 +79,18 @@ public class BookServiceImplementation implements BookService {
     @Override
     public BookDTO findBookById(int id){
         Book book = bookRepository.findById(id);
-        bookDTO = bookMapper.fromBookToBookDTO(book);
-        return bookDTO;
+        return bookMapper.fromBookToBookDTO(book);
     }
 
     @Override
     public List<BookDTO> findAllBooks(){
         List<Book> bookList = bookRepository.findAll();
         List<BookDTO> bookDTOList = new ArrayList<>();
-        for(Book book : bookList){
-            bookDTO = bookMapper.fromBookToBookDTO(book);
-            bookDTOList.add(bookDTO);
+        if(bookList != null){
+            for(Book book : bookList){
+                BookDTO bookDTO = bookMapper.fromBookToBookDTO(book);
+                bookDTOList.add(bookDTO);
+            }
         }
         return  bookDTOList;
     }
@@ -131,6 +131,16 @@ public class BookServiceImplementation implements BookService {
     }
 
     @Override
+    public void deleteAllUserBookings(int deleteID){
+        User user = userRepository.findById(deleteID);
+        List<Book> bookList = user.getBookings();
+        if(bookList != null){
+            for(Book book : bookList){
+                bookRepository.deleteById(book.getId());
+            }
+        }
+    }
+    @Override
     public void saveOrUpdateBook(int userID,int carID,String bookID, String startDate,String endDate){
         Book book;
         User user = userRepository.findById(userID);
@@ -138,11 +148,12 @@ public class BookServiceImplementation implements BookService {
         LocalDate start = LocalDate.parse(startDate);
         LocalDate end = LocalDate.parse(endDate);
 
-        //int id = Integer.parseInt(bookID);
-        Integer id = Integer.parseInt(bookID);
-        book = new Book(id,user,car,start,end);
-
-
+        if(bookID.isEmpty()){
+            book = new Book(user,car,start,end);
+        }else{
+            Integer id = Integer.parseInt(bookID);
+            book = new Book(id,user,car,start,end);
+        }
         bookRepository.saveOrUpdateBook(book);
     }
 }
