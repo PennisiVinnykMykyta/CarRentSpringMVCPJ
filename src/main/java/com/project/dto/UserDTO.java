@@ -1,21 +1,19 @@
 package com.project.dto;
 
 import com.project.entities.Book;
-import com.project.entities.enums.UserType;
 
-import java.util.Date;
 import java.util.List;
 
 
 public class UserDTO {
 
-    private int id;
-    private UserType userType;
+    private String id;
+    private String userType;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-    private Date birthDate;
+    private String birthDate;
 
     private List<Book> bookList;
 
@@ -27,11 +25,11 @@ public class UserDTO {
         this.bookList = bookList;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -67,26 +65,26 @@ public class UserDTO {
         this.password = password;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
     public UserDTO() {
     }
 
-    public UserType getUserType() {
+    public String getUserType() {
         return userType;
     }
 
-    public void setUserType(UserType userType) {
+    public void setUserType(String userType) {
         this.userType = userType;
     }
 
-    public UserDTO(int id, String firstName, String lastName, String email, String password, UserType userType, Date birthDate, List<Book> bookList) {
+    public UserDTO(String id, String firstName, String lastName, String email, String password, String userType, String birthDate, List<Book> bookList) {
         this.id = id;
         this.userType = userType;
         this.firstName = firstName;

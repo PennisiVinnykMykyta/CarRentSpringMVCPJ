@@ -7,13 +7,11 @@ import com.project.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -51,10 +49,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.GET)
-    public String addUser(HttpServletRequest request, Model model){
-        int userID = Integer.parseInt(request.getParameter("userID"));
-        UserDTO userDTO = userService.getUserById(userID);
-        model.addAttribute("user",userDTO);
+    public String addUser(Model model){
+        UserDTO userDTO = new UserDTO();
+        model.addAttribute("userToChange",userDTO);
         return "addUser";
     }
 
@@ -78,7 +75,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/homepage")
-    public String homepage(HttpServletRequest request, Principal principal, Model model, RedirectAttributes redirectAttributes) {
+    public String homepage(Principal principal, Model model) {
 
         String email =  principal.getName(); //request.getParameter("email"); for debug only!
 
@@ -102,23 +99,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveUser(HttpServletRequest request,Model model){
+    public String saveUser(@ModelAttribute("userToChange") UserDTO userToChange) throws ParseException {
 
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String dateForm = request.getParameter("birthDate");
-        String type = request.getParameter("type");
-        int userID = Integer.parseInt(request.getParameter("userID"));
-        int userToChangeID = Integer.parseInt(request.getParameter("userToChangeID"));
+        return userService.saveOrUpdateUser(userToChange);
 
-        String homepage = userService.saveOrUpdateUser(userID,userToChangeID,firstName,lastName,email,password,dateForm,type);
-
-        UserDTO userDTO = userService.getUserById(userID);
-        model.addAttribute("user",userDTO);
-
-        return homepage;
     }
 
 }

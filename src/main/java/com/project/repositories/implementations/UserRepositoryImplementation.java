@@ -77,16 +77,4 @@ public class UserRepositoryImplementation implements UserRepository {
         }
     }
 
-    @Override
-    public User findByEmailAndPassword(String mail,String password){
-        try(Session session = HibernateUtilConfig.getSessionFactory().openSession()){
-            String command = "select s from User s where s.password = :password AND s.email = :mail";
-            Query query = session.createQuery(command);
-            query.setParameter("password",password);
-            query.setParameter("mail",mail);
-            return (User) query.getSingleResult();
-        }catch(NoResultException exception){
-            return null;
-        }
-    }
 }

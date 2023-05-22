@@ -6,9 +6,7 @@
 </head>
 <body>
 
-<form method="GET" name="logout" action="/SpringMVCPJ_war_exploded/user/homepage">
-    <input type="hidden" name="email" value="${user.email}">
-    <input type="hidden" name="password" value="${user.password}" >
+<form method="GET" action="/SpringMVCPJ_war_exploded/user/homepage">
     <input type="submit" value="Go Back">
 </form>
 
@@ -59,13 +57,11 @@
             </td>
             <td>
                 <form action="/SpringMVCPJ_war_exploded/book/addBook" method="GET">
-                    <input type="hidden" name="userID" value="${user.id}"/>
                     <input type="hidden" name="bookID" value="${book.id}">
                     <input type="submit" value="Modify Booking">
                 </form>
 
                 <form action="./deleteLocal" method="POST">
-                    <input type="hidden" name="userID" value="${user.id}"/>
                     <input type="hidden" name="deleteID" value="${book.id}">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <input type="submit" value="Delete Booking">

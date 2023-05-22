@@ -12,7 +12,7 @@ public class User implements  Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "user_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "email")
     private String email;
@@ -99,7 +99,7 @@ public class User implements  Serializable{
         this.birthDate = birthDate;
     }
 
-    public User(int id, String email, String password, String firstName, String lastName, UserType type, Date birthDate) {
+    public User(Integer id, String email, String password, String firstName, String lastName, UserType type, Date birthDate) {
         this.id = id;
         this.email = email;
         this.password = password;

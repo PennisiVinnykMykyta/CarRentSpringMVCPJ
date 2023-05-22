@@ -6,9 +6,7 @@
 </head>
 <body>
 
-<form method="GET" name="logout" action="/SpringMVCPJ_war_exploded/user/homepage">
-    <input type="hidden" name="email" value="${user.email}">
-    <input type="hidden" name="password" value="${user.password}" >
+<form method="GET" action="/SpringMVCPJ_war_exploded/user/homepage">
     <input type="submit" value="Go Back">
 </form>
 

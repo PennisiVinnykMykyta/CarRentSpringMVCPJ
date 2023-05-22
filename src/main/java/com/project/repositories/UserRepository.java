@@ -9,8 +9,6 @@ public interface UserRepository{
     void saveOrUpdateUser(User user);
     List<User> findAll();
     User findById(int id);
-    User findByEmailAndPassword(String email, String password);
-
     User findByEmail(String email);
 
 }

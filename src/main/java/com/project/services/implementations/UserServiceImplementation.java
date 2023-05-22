@@ -70,56 +70,43 @@ public class UserServiceImplementation implements UserService {
         return "userList";
     }
 
-    public String saveOrUpdateUser(int userID, int userToChangeID,String firstName, String lastName, String email, String password, String dateString,String typeUser)
-    {
+    public String saveOrUpdateUser(UserDTO userToChange) throws ParseException {
         User user;
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date;
-        try {
-            date = simpleDateFormat.parse(dateString);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+        Integer id;
+
+        if(userToChange.getId() == null || userToChange.getId().isEmpty()){
+            id = null;
+        }else{
+             id = Integer.parseInt(userToChange.getId());
         }
 
-        UserType type;
-        password = passwordEncoder.encode(password);
-
-        switch (typeUser){
-            case "customer":
-                type = UserType.CUSTOMER;
-                break;
-
-            case "admin":
-                type = UserType.ADMIN;
-                break;
-
-            default: //if user type is null that means we are changing some details
-
-                if(userID == userToChangeID){//means user is changing info about themselves
-                    user = userRepository.findById(userToChangeID);
-                    type = user.getType();
-                }else{//a user is changing another users info
-                    User changeUser = userRepository.findById(userToChangeID);
-                    type = changeUser.getType();
-                }
-
-                user = new User(userToChangeID,email,password,firstName,lastName,type,date);
-
-                userRepository.saveOrUpdateUser(user);
-
-                user = userRepository.findById(userID);
-
-                if(user.getType() == UserType.ADMIN){
-                    return "adminHomepage";
-                }else{
-                    return "customerHomepage";
-                }
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date birthDate;
+        try{
+            birthDate = format.parse(userToChange.getBirthDate());
+        }catch (Exception e) {
+            return "parsingError";
         }
-        user = new User(email,password,firstName,lastName,type,date);
+
+        String password = passwordEncoder.encode(userToChange.getPassword());
+
+        String type = userToChange.getUserType();
+
+        UserType role;
+
+        if(type.equals("customer")){
+            role = UserType.CUSTOMER;
+        }else{
+            role = UserType.ADMIN;
+        }
+
+        user = new User(id,userToChange.getEmail(),password,userToChange.getFirstName(),userToChange.getLastName(),role,birthDate);
+
         userRepository.saveOrUpdateUser(user);
 
-        return "adminHomepage"; //we know it's an admin homepage for sure cos only the admin can add new users
+         return "redirect:/user/homepage";
+
     }
 
 }

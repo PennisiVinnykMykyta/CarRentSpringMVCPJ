@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -7,26 +8,23 @@
 
 <h3>Compile the form below to add a new car to the list:</h3>
 
-<form action="./addOrChangeCar" method="POST">
-    <input type="hidden" name="userID" value="${user.id}" />
-    <input type="hidden" name="carID" />
+<form:form action="/SpringMVCPJ_war_exploded/car/addOrChangeCar" method="POST" modelAttribute="car">
+    <form:hidden path="id" value=""/>
 
-    Model: <input type = "text" name="model" />
+    Model: <form:input path="model" />
     <br><br>
-    Brand: <input type = "text" name="brand" />
+    Brand: <form:input path="brand" />
     <br><br>
-    Color: <input type = "text" name="color" />
+    Color: <form:input path="color" />
     <br><br>
-    NumberPlate: <input type = "text" name="plate" />
+    NumberPlate: <form:input path="numberPlate" />
     <br><br>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <input type="submit" value="Add New Car"/>
 
-</form>
+</form:form>
 
-<form method="GET" name="revert" action="/SpringMVCPJ_war_exploded/user/homepage" >
-    <input type="hidden" name="email" value="${user.email}" />
-    <input type="hidden" name="password" value="${user.password}" />
+<form method="GET" action="/SpringMVCPJ_war_exploded/user/homepage" >
     <input type="submit" value="Cancel" />
 </form>
 

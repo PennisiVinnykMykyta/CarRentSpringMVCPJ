@@ -10,7 +10,7 @@ public class Car implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "car_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "number_plate")
     private String numberPlate;
@@ -35,7 +35,7 @@ public class Car implements Serializable {
         return bookings;
     }
 
-    public Car(int id, String numberPlate, String color, String model, String brand) {
+    public Car(Integer id, String numberPlate, String color, String model, String brand) {
         this.id = id;
         this.numberPlate = numberPlate;
         this.color = color;

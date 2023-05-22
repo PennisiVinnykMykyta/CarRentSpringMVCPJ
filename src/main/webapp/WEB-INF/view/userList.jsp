@@ -7,9 +7,7 @@
 <body>
 <h3>List of all the Users</h3>
 
-<form method="GET" name="logout" action="./homepage">
-    <input type="hidden" name="email" value="${user.email}">
-    <input type="hidden" name="password" value="${user.password}" >
+<form method="GET" action="./homepage">
     <input type="submit" value="Go Back">
 </form>
 <br><br>

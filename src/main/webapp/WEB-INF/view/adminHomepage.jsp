@@ -10,12 +10,12 @@
 
 <br><br>
 
-<form method="GET" name="profile" action="./profile">
+<form method="GET" action="./profile">
     <input type="hidden" name="userID" value="${user.id}"/>
     <input type="submit" value="See Your Profile Info">
 </form>
 
-<form method="GET" name="logout" action="/SpringMVCPJ_war_exploded/book/bookList">
+<form method="GET" action="/SpringMVCPJ_war_exploded/book/bookList">
     <input type="hidden" name="userID" value="${user.id}"/>
     <input type="submit" value="View Your Bookings">
 </form>

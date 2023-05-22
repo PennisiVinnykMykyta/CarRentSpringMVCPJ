@@ -1,3 +1,5 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -5,36 +7,43 @@
 </head>
 <body>
 
-<form method="POST" name="changeProfile" action="./save">
-    First Name: <input type="text" name="firstName" value="${userToChange.firstName}">
+<form:form method="POST" action="/SpringMVCPJ_war_exploded/user/save" modelAttribute="userToChange">
+
+    <form:label path="firstName">First Name:</form:label>
+    <form:input path="firstName" />
     <br><br>
 
-    Last Name: <input type="text" name="lastName" value="${userToChange.lastName}">
+    <form:label path="lastName">Last Name:</form:label>
+    <form:input path="lastName" />
     <br><br>
 
-    Email: <input type="text" name="email" value="${userToChange.email}">
+    <form:label path="email">Email:</form:label>
+    <form:input path="email" />
     <br><br>
 
-    Password: <input type="text" name="password" value="RE-INSERT YOUR PASSWORD OR SELECT A NEW ONE">
+    Password: RE-INSERT YOUR PASSWORD OR SELECT A NEW ONE
+    <br>
+    <form:input path="password" />
     <br><br>
 
-    Birthday: <input type="text" name="birthDate" value="${userToChange.birthDate}">
+    <form:label path="birthDate">Birthday:</form:label>
+    <form:input path="birthDate" />
+
+    <form:hidden path="userType" />
+    <form:hidden path="id" />
+
     <br><br>
 
     <input type="hidden" name ="userID" value="${user.id}">
-    <input type="hidden" name="userToChangeID" value="${userToChange.id}">
-    <input type="hidden" name="type" value="other">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <input type="submit" value="Save Changes">
+
+</form:form>
+
+<form method="GET" name="logout" action="./homepage">
+        <input type="submit" value="Cancel">
 </form>
 
-    <form method="GET" name="logout" action="./homepage">
-        <input type="hidden" name="email" value="${user.email}">
-        <input type="hidden" name="password" value="${user.password}" >
-        <input type="submit" value="Cancel">
-    </form>
-
-</table>
 
 </body>
 </html>

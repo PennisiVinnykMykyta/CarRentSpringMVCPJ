@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -5,29 +6,32 @@
 </head>
 <body>
 
-<form method="GET" name="logout" action="/SpringMVCPJ_war_exploded/user/homepage">
-  <input type="hidden" name="email" value="${user.email}">
-  <input type="hidden" name="password" value="${user.password}" >
+<form method="GET" action="/SpringMVCPJ_war_exploded/user/homepage">
   <input type="submit" value="Cancel">
 </form>
 
 <br><br>
 
-<form action="./addOrChangeCar" method="POST">
+<form:form action="./addOrChangeCar" method="POST" modelAttribute="car">
 
-  Model: <input type="text" name="model"  value="${car.model}">
+  <form:label path="model">Model:</form:label>
+  <form:input path="model" />
   <br>
-  Brand: <input type="text" name="brand" value="${car.brand}">
+  <form:label path="brand">Brand:</form:label>
+  <form:input path="brand" />
   <br>
-  Color: <input type="text" name="color" value="${car.color}">
+  <form:label path="color">Color:</form:label>
+  <form:input path="color" />
   <br>
-  Plate Number: <input type="text" name="plate" value="${car.numberPlate}">
+  <form:label path="numberPlate">NumberPlate:</form:label>
+  <form:input path="numberPlate" />
   <br>
-  <input type="hidden" name="carID" value="${car.id}" />
-  <input type="hidden" name="userID" value="${user.id}" />
+  <form:hidden path="id" />
+
+  <input type="hidden" name="email" value="${user.email}" />
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
   <input type="submit" value="Submit" />
-</form>
+</form:form>
 <br>
 
 </body>

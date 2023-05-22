@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -50,8 +49,7 @@ public class BookController {
 
     @GetMapping(value = "/addBook")
     public String bookForm(HttpServletRequest request, Model model){
-        UserDTO userDTO = userService.getUserById(Integer.parseInt(request.getParameter("userID")));
-        model.addAttribute("user", userDTO);
+
         model.addAttribute("bookID",request.getParameter("bookID"));
 
         return "addBook";
@@ -59,10 +57,6 @@ public class BookController {
 
     @PostMapping(value = "/selectCar")
     public String carSelection(HttpServletRequest request, Model model){
-        int userID = Integer.parseInt(request.getParameter("userID"));
-        UserDTO userDTO = userService.getUserById(userID);
-        model.addAttribute("user",userDTO);
-
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
 
@@ -81,7 +75,7 @@ public class BookController {
     }
 
     @PostMapping(value="/saveOrUpdateBook")
-    public String saveOrChangeBook(HttpServletRequest request, RedirectAttributes redirectAttributes){
+    public String saveOrChangeBook(HttpServletRequest request){
         int userID = Integer.parseInt(request.getParameter("userID"));
         UserDTO userDTO = userService.getUserById(userID);
 
@@ -93,9 +87,6 @@ public class BookController {
 
         bookService.saveOrUpdateBook(userID,carID,bookID,startDate,endDate);
 
-
-        redirectAttributes.addAttribute("email",userDTO.getEmail());
-        redirectAttributes.addAttribute("password", userDTO.getPassword());
 
         return "redirect:/user/homepage";
     }

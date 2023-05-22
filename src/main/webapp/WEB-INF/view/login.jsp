@@ -13,16 +13,15 @@
 
 <h1>Welcome to the CarRent Site!</h1>
 
-<form method="POST" name="login" action="./login" class="form-horizontal">
+<form method="POST" action="./login" class="form-horizontal">
     <h4>Please enter your credentials:</h4>
     <c:if test="${param.error != null}">
         Invalid Credentials!
-    </c:if>
-    <c:if test="${param.forbidden != null}">
-        You cannot access this page!
+        <br><br>
     </c:if>
     <c:if test="${param.logout != null}">
         You have logged out!
+        <br><br>
     </c:if>
     <table>
         Email:

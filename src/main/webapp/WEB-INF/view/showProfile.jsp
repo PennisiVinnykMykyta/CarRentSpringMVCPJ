@@ -20,16 +20,14 @@ Password: YOUR PASSWORD IS HIDDEN
 Birthday: ${user.birthDate}
 <br><br>
 
-<form method="POST" name="modifyProfile" action="./changeProfile">
+<form method="POST" action="./changeProfile">
     <input type="hidden" name="userID" value="${user.id}">
     <input type="hidden" name="userToChangeID" value="${user.id}">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <input type="submit" value="Change Profile Details">
 </form>
 
-<form method="GET" name="revert" action="./homepage">
-    <input type="hidden" name="email" value="${user.email}">
-    <input type="hidden" name="password" value="${user.password}">
+<form method="GET" action="./homepage">
     <input type="submit" value="Go back">
 </form>
 

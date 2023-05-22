@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -5,39 +6,41 @@
 </head>
 <body>
 
-<form method="POST" name="changeProfile" action="./save">
-    First Name: <input type="text" name="firstName" />
+<form:form method="POST" action="/SpringMVCPJ_war_exploded/user/save" modelAttribute="userToChange">
+
+    First Name:
+    <form:input path="firstName" />
     <br><br>
 
-    Last Name: <input type="text" name="lastName" />
+    Last Name:
+    <form:input path="lastName" />
     <br><br>
 
-    Email: <input type="text" name="email"/>
+    Email:
+    <form:input path="email" />
     <br><br>
 
-    Password: <input type="text" name="password" />
+    Password:
+    <form:input path="password" />
     <br><br>
 
-    Birthday: <input type="text" name="birthDate" />
+    Birthday:
+    <form:input path="birthDate" />
     <br><br>
 
      Type of user:
     <br>
-    <input type="radio" name="type" value="admin" />Admin
+    <form:radiobutton path="userType" value="admin" />Admin
     <br>
-    <input  type="radio" name="type" value="customer" checked="true" />Customer
-
+    <form:radiobutton path="userType" value="customer"  />Customer
     <br><br>
 
-    <input type="hidden" name ="userID" value="${user.id}">
-    <input type="hidden" name="userToChangeID" value="${user.id}">
+    <form:hidden path="id" value = ""/>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <input type="submit" value="Save Changes">
-</form>
+</form:form>
 
-<form method="GET" name="logout" action="./homepage">
-    <input type="hidden" name="email" value="${user.email}">
-    <input type="hidden" name="password" value="${user.password}" >
+<form method="GET" action="./homepage">
     <input type="submit" value="Cancel">
 </form>
 

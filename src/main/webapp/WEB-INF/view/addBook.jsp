@@ -15,15 +15,12 @@ ${error}
     End Date:
     <input type="date" name="endDate" />
     <br><br>
-    <input type="hidden" name="userID"  value="${user.id}">
     <input type="hidden" name="bookID"  value="${bookID}">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <input type="submit" value="Continue">
 </form>
 
-<form method="GET" name="revert" action="/SpringMVCPJ_war_exploded/user/homepage">
-    <input type="hidden" name="email" value="${user.email}">
-    <input type="hidden" name="password" value="${user.password}">
+<form method="GET" action="/SpringMVCPJ_war_exploded/user/homepage">
     <input type="submit" value="Cancel">
 </form>
 

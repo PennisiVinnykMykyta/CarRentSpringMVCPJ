@@ -5,17 +5,17 @@ import org.springframework.stereotype.Component;
 
 public class CarDTO {
 
-    private int id;
+    private String id;
     private String numberPlate;
     private String color;
     private String model;
     private String brand;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -51,11 +51,14 @@ public class CarDTO {
         this.brand = brand;
     }
 
-    public CarDTO(int id, String numberPlate, String color, String model, String brand) {
+    public CarDTO(String id, String numberPlate, String color, String model, String brand) {
         this.id = id;
         this.numberPlate = numberPlate;
         this.color = color;
         this.model = model;
         this.brand = brand;
+    }
+
+    public CarDTO() {
     }
 }
