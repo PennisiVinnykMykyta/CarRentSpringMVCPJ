@@ -2,41 +2,50 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Your Bookings</title>
 </head>
 <body>
 
+<div class="jumbotron text-center">
+    <h2>List of all your Bookings</h2>
+</div>
+
 <form method="GET" action="/SpringMVCPJ_war_exploded/user/homepage">
-    <input type="submit" value="Go Back">
+    <input type="submit" class="btn btn-primary" value="Go Back">
 </form>
 
-<table border="1px">
-    <tr>
+<table class="table table-bordered table-striped table-condensed ">
+    <tr  class="info">
         <th>
-            Booking ID
+            <p class="text-center">Booking ID</p>
         </th>
         <th>
-            User
+            <p class="text-center">User</p>
         </th>
         <th>
-            Car
+            <p class="text-center">Car</p>
         </th>
         <th>
-            StartDate
+            <p class="text-center">StartDate</p>
         </th>
         <th>
-            Drop-Off Date
+            <p class="text-center">Drop-Off Date</p>
         </th>
         <th>
-            Conformation
+            <p class="text-center">Conformation</p>
         </th>
         <th>
-            Options
+            <p class="text-center">Options</p>
         </th>
     </tr>
 
     <c:forEach items="${bookList}" var="book">
-        <tr>
+        <tr class="text-center">
             <td>
                     ${book.id}
             </td>
@@ -59,14 +68,14 @@
                 <form action="/SpringMVCPJ_war_exploded/book/addBook" method="GET">
                     <input type="hidden" name="userID" value="${userID}">
                     <input type="hidden" name="bookID" value="${book.id}">
-                    <input type="submit" value="Modify Booking">
+                    <input type="submit" class="btn btn-info" value="Modify Booking">
                 </form>
 
                 <form action="./deleteLocal" method="POST">
                     <input type="hidden" name="userID" value="${userID}">
                     <input type="hidden" name="deleteID" value="${book.id}">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                    <input type="submit" value="Delete Booking">
+                    <input type="submit" class="btn btn-danger" value="Delete Booking">
                 </form>
             </td>
         </tr>

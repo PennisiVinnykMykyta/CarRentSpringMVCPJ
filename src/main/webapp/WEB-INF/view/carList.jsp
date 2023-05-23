@@ -2,40 +2,50 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <title>Car List</title>
 </head>
+
 <body>
 
+<div class="jumbotron text-center">
+    <h2>List of all the Cars</h2>
+</div>
+<br>
 <form method="GET" action="/SpringMVCPJ_war_exploded/user/homepage">
-    <input type="submit" value="Go Back">
+    <input type="submit" class="btn btn-primary" value="Go Back">
 </form>
+<br>
 
-<h4>List of all the cars present in the parking lot:</h4>
-
-<table border="1px">
-    <tr>
+<table class="table table-bordered table-striped table-condensed ">
+    <tr  class="info">
         <th>
-            Car Number
+            <p class="text-center">Car Number</p>
         </th>
         <th>
-            Brand
+            <p class="text-center">Brand</p>
         </th>
         <th>
-            Model
+            <p class="text-center">Model</p>
         </th>
         <th>
-            Color
+            <p class="text-center">Color</p>
         </th>
         <th>
-            Number Plate
+            <p class="text-center">Number Plate</p>
         </th>
         <th>
-            Options
+            <p class="text-center">Options</p>
         </th>
     </tr>
 
     <c:forEach items="${carList}" var="car">
-        <tr>
+        <tr class ="text-center">
             <td>
                     ${car.id}
             </td>
@@ -54,13 +64,13 @@
             <td>
                 <form action="./changeCar" method="GET">
                     <input type="hidden" name="carID" value="${car.id}">
-                    <input type="submit" value="Modify Car">
+                    <input type="submit" class="btn btn-info" value="Modify Car">
                 </form>
 
                 <form action="./delete" method="POST">
                     <input type="hidden" name="deleteID" value="${car.id}">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                    <input type="submit" value="Delete Car">
+                    <input type="submit" class="btn btn-danger" value="Delete Car">
                 </form>
             </td>
         </tr>

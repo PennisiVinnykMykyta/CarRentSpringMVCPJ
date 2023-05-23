@@ -6,34 +6,42 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <title>Login Page</title>
 </head>
 <body>
 
-<h1>Welcome to the CarRent Site!</h1>
+<div class="jumbotron text-center">
+    <h1>Welcome to the CarRent Site!</h1>
+    <br>
+    <p>Please enter your credentials:</p>
+</div>
 
 <form method="POST" action="./login" class="form-horizontal">
-    <h4>Please enter your credentials:</h4>
     <c:if test="${param.error != null}">
-        Invalid Credentials!
+        <p class="text-center">Invalid Credentials!</p>
         <br><br>
     </c:if>
     <c:if test="${param.logout != null}">
-        You have logged out!
+        <p class="text-center">You have logged out!</p>
         <br><br>
     </c:if>
     <table>
-        Email:
-        <input type="text" id="email" name="email" placeholder = "email" />
+        <p class="text-center">Email:</p>
+        <p class="text-center"><input type="text" id="email" name="email" placeholder = "email" /></p>
 
-        Password:
-        <input type="text" id="password" name="password" placeholder ="password" />
+        <p class="text-center">Password:</p>
+        <p class="text-center"><input type="text" id="password" name="password" placeholder ="password" /></p>
 
     </table>
     <br><br>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-    <input type="submit" value="Log In"/>
+    <p class="text-center"><input type="submit" class = "btn btn-primary" value="Log In"/></p>
 
 </form>
 

@@ -2,16 +2,24 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Car selection</title>
 </head>
 <body>
 
-<form method="GET" action="/SpringMVCPJ_war_exploded/user/homepage">
-    <input type="submit" value="Cancel">
-</form>
-
+<div class="jumbotron">
 <h3>Please select the vehicle you'd look to book from the list below:</h3>
 
+</div>
+
+<form method="GET" action="/SpringMVCPJ_war_exploded/user/homepage">
+    <input type="submit" class="btn btn-primary" value="Cancel">
+</form>
+<br>
 <form action="./saveOrUpdateBook" method="POST">
 
     <input type="hidden" name="startDate" value="${startDate}"/>
@@ -20,13 +28,13 @@
     <input type="hidden" name="bookID" value="${bookID}"/>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
-<table border="1px">
+<table class="table table-bordered table-striped table-condensed">
     <tr>
         <th>
-            Model
+            Car
         </th>
         <th>
-            Brand
+            Model
         </th>
         <th>
             Color
@@ -39,17 +47,17 @@
     <c:forEach items="${carList}" var="car">
         <tr>
             <td>
-                    ${car.model}
+                    ${car.brand}
             </td>
             <td>
-                    ${car.brand}
+                    ${car.model}
             </td>
             <td>
                     ${car.color}
             </td>
             <td>
                 <input type="hidden" name="carID" value="${car.id}"/>
-                <input type="submit" value="<-- Book This Vehicle"/>
+                <input type="submit" class="btn btn-success" value="<-- Book This Vehicle"/>
             </td>
         </tr>
     </c:forEach>

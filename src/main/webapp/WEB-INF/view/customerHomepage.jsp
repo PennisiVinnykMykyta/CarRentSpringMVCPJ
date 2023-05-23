@@ -2,65 +2,73 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Customer HomePage</title>
 </head>
 <body>
-<h2>Welcome Customer: ${user.firstName} ${user.lastName}</h2>
+<div class="jumbotron text-center">
+<h2>Welcome Customer: <br> ${user.firstName} ${user.lastName}</h2>
+</div>
 
 <br><br>
 <table>
     <tr>
         <form method="GET" action="./profile">
             <input type="hidden" name="userID" value="${user.id}"/>
-            <input type="submit" value="See Your Profile Info">
+            <input type="submit" class="btn btn-info" value="See Your Profile Info">
         </form>
     </tr>
     <tr>
         <form method="GET" action="/SpringMVCPJ_war_exploded/book/addBook">
             <input type="hidden" name="userID" value="${user.id}"/>
-            <input type="submit" value="Make a New Booking">
+            <input type="submit" class="btn btn-primary" value="Make a New Booking">
         </form>
     </tr>
     <tr>
         <form method="GET" action="./logout">
-            <input type="submit" value="Log Out">
+            <input type="submit" class="btn btn-warning" value="Log Out">
         </form>
     </tr>
 </table>
+<br>
 
-<table border="1px">
-    <tr>
+<table class="table table-bordered table-striped table-condensed">
+    <tr class="info">
         <th>
-            Booking Number
+            <p class="text-center">Booking Number</p>
         </th>
         <th>
-            Car
+            <p class="text-center">Car</p>
         </th>
         <th>
-            Model
+            <p class="text-center">Model</p>
         </th>
         <th>
-            Color
+            <p class="text-center">Color</p>
         </th>
         <th>
-            Number plate
+            <p class="text-center">Number plate</p>
         </th>
         <th>
-            Starting Date
+            <p class="text-center">Starting Date</p>
         </th>
         <th>
-            Drop-Off Date
+            <p class="text-center">Drop-Off Date</p>
         </th>
         <th>
-            Confirmation
+            <p class="text-center">Confirmation</p>
         </th>
         <th>
-            Options
+            <p class="text-center">Options</p>
         </th>
     </tr>
 
     <c:forEach items="${user.bookList}" var="book">
-        <tr>
+        <tr class="text-center">
             <td>
                     ${book.id}
             </td>
@@ -90,14 +98,14 @@
                     <input type="hidden" name="command" value="addOrChangeBooking"/>
                     <input type="hidden" name="userID" value="${user.id}"/>
                     <input type="hidden" name="bookID" value="${book.id}">
-                    <input type="submit" value="Modify Booking">
+                    <input type="submit" class="btn btn-info" value="Modify Booking">
                 </form>
 
                 <form action="/SpringMVCPJ_war_exploded/book/deleteLocal" method="POST">
                     <input type="hidden" name="userID" value="${user.id}" />
                     <input type="hidden" name="deleteID" value="${book.id}">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                    <input type="submit" value="Delete Booking">
+                    <input type="submit" class="btn btn-danger" value="Delete Booking">
                 </form>
             </td>
         </tr>
