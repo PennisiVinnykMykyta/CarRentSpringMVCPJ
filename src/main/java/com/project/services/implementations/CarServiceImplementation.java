@@ -19,16 +19,17 @@ public class CarServiceImplementation implements CarService {
     @Autowired
     private CarMapper carMapper;
 
-    public CarServiceImplementation(CarRepository userRepository){
+    public CarServiceImplementation(CarRepository userRepository) {
         this.carRepository = userRepository;
     }
 
-    public CarDTO findCarById(int id){
+    public CarDTO findCarById(int id) {
         Car car = carRepository.findById(id);
 
         return carMapper.fromCarToCarDTO(car);
     }
-    public List<CarDTO> findAllCars(){
+
+    public List<CarDTO> findAllCars() {
         List<Car> carList = carRepository.findAll();
         List<CarDTO> carDTOList = new ArrayList<>();
         CarDTO carDTO;
@@ -38,29 +39,32 @@ public class CarServiceImplementation implements CarService {
                 carDTOList.add(carDTO);
             }
         }
-        return  carDTOList;
+        return carDTOList;
     }
-    public List<CarDTO> availableCars(List<Integer> bookedCars){
+
+    public List<CarDTO> availableCars(List<Integer> bookedCars) {
         List<Car> availableCarList = carRepository.availableCars(bookedCars);
         List<CarDTO> carList = new ArrayList<>();
-        for(Car car: availableCarList){
+        for (Car car : availableCarList) {
             CarDTO carDTO = carMapper.fromCarToCarDTO(car);
             carList.add(carDTO);
         }
-        return  carList;
+        return carList;
     }
-    public void deleteById(int id){
+
+    public void deleteById(int id) {
 
         carRepository.deleteById(id);
     }
-    public void saveOrUpdateCar(String carID,String model,String brand, String color, String numberPlate){
+
+    public void saveOrUpdateCar(String carID, String model, String brand, String color, String numberPlate) {
         Car car;
 
-        if(carID == null || carID.isEmpty()){
-            car = new Car(numberPlate,color,model,brand);
-        }else{
+        if (carID == null || carID.isEmpty()) {
+            car = new Car(numberPlate, color, model, brand);
+        } else {
             int id = Integer.parseInt(carID);
-            car = new Car(id,numberPlate,color,model,brand);
+            car = new Car(id, numberPlate, color, model, brand);
         }
 
         carRepository.saveOrUpdateCar(car);

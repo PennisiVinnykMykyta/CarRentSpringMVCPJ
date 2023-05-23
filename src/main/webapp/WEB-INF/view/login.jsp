@@ -33,15 +33,15 @@
     </c:if>
     <table>
         <p class="text-center">Email:</p>
-        <p class="text-center"><input type="text" id="email" name="email" placeholder = "email" /></p>
+        <p class="text-center"><input type="text" id="email" name="email" placeholder="email"/></p>
 
         <p class="text-center">Password:</p>
-        <p class="text-center"><input type="text" id="password" name="password" placeholder ="password" /></p>
+        <p class="text-center"><input type="text" id="password" name="password" placeholder="password"/></p>
 
     </table>
     <br><br>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-    <p class="text-center"><input type="submit" class = "btn btn-primary" value="Log In"/></p>
+    <p class="text-center"><input type="submit" class="btn btn-primary" value="Log In"/></p>
 
 </form>
 

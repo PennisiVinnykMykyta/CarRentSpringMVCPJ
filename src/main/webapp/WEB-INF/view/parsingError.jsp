@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="jumbotron text-center">
-<h1>ERROR COULDN'T PARSE DATE</h1>
+    <h1>ERROR COULDN'T PARSE DATE</h1>
 </div>
 <form method="GET" class="text-center" action="./homepage">
     <input type="submit" class="btn btn-primary" value="Go To Homepage">

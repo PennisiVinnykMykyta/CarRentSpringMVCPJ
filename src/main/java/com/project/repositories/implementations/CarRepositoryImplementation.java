@@ -49,7 +49,7 @@ public class CarRepositoryImplementation implements CarRepository {
     public List<Car> findAll() { //view all cars
         try (Session session = HibernateUtilConfig.getSessionFactory().openSession()) {
             return session.createQuery("SELECT s from Car s", Car.class).list();
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

@@ -12,7 +12,7 @@
 <body>
 
 <div class="jumbotron">
-<h3>Please select the vehicle you'd look to book from the list below:</h3>
+    <h3>Please select the vehicle you'd look to book from the list below:</h3>
 
 </div>
 
@@ -20,13 +20,6 @@
     <input type="submit" class="btn btn-primary" value="Cancel">
 </form>
 <br>
-<form action="./saveOrUpdateBook" method="POST">
-
-    <input type="hidden" name="startDate" value="${startDate}"/>
-    <input type="hidden" name="endDate" value="${endDate}"/>
-    <input type="hidden" name="userID" value="${userID}"/>
-    <input type="hidden" name="bookID" value="${bookID}"/>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
 <table class="table table-bordered table-striped table-condensed">
     <tr>
@@ -56,13 +49,20 @@
                     ${car.color}
             </td>
             <td>
-                <input type="hidden" name="carID" value="${car.id}"/>
-                <input type="submit" class="btn btn-success" value="<-- Book This Vehicle"/>
+                <form action="./saveOrUpdateBook" method="POST">
+                    <input type="hidden" name="startDate" value="${startDate}"/>
+                    <input type="hidden" name="endDate" value="${endDate}"/>
+                    <input type="hidden" name="userID" value="${userID}"/>
+                    <input type="hidden" name="bookID" value="${bookID}"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                    <input type="hidden" name="carID" value="${car.id}"/>
+                    <input type="submit" class="btn btn-success" value="<-- Book This Vehicle"/>
+                </form>
             </td>
         </tr>
     </c:forEach>
 </table>
-</form>
+
 
 </body>
 </html>

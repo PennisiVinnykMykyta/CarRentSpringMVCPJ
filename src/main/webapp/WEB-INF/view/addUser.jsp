@@ -17,28 +17,28 @@
 <form:form method="POST" action="/SpringMVCPJ_war_exploded/user/save" modelAttribute="userToChange">
 
     <h3>First Name:</h3>
-    <form:input path="firstName" />
+    <form:input path="firstName"/>
 
     <h3>Last Name:</h3>
-    <form:input path="lastName" />
+    <form:input path="lastName"/>
 
     <h3>Email:</h3>
-    <form:input path="email" />
+    <form:input path="email"/>
 
     <h3>Password:</h3>
-    <form:input path="password" />
+    <form:input path="password"/>
 
     <h3>Birthday:</h3>
-    <form:input path="birthDate" />
+    <form:input path="birthDate"/>
 
     <h3>Type of user:</h3>
     <h3>Admin</h3>
-    <form:radiobutton path="userType" value="admin" />
+    <form:radiobutton path="userType" value="admin"/>
     <h3>Customer</h3>
     <form:radiobutton path="userType" value="customer"/>
     <br><br>
 
-    <form:hidden path="id" value = ""/>
+    <form:hidden path="id" value=""/>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <input type="submit" class="btn btn-success" value="Save Changes">
 </form:form>

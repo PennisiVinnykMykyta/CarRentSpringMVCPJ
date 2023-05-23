@@ -1,7 +1,5 @@
 package com.project.entities;
 
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -11,7 +9,7 @@ public class Book {
     @Id
     private int id;
 
-    @ManyToOne(fetch =  FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -19,7 +17,8 @@ public class Book {
     @JoinColumn(name = "car_id")
     private Car car;
 
-    public Book(){}
+    public Book() {
+    }
 
     public Book(User user, Car car, LocalDate startDate, LocalDate endDate) {
         this.user = user;

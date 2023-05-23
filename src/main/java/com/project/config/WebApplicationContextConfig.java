@@ -21,7 +21,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer { //gestisc
     }
 
     @Bean
-    public InternalResourceViewResolver getInternalResourceViewResolver(){
+    public InternalResourceViewResolver getInternalResourceViewResolver() {
         //quando otteniamo i dati grezzi e li vogliamo trasformare in formato compatibile col nostro browser
 
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();

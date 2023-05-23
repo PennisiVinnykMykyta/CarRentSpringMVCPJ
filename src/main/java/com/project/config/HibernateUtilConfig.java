@@ -1,21 +1,24 @@
 package com.project.config;
 
-import java.util.Properties;
-
+import com.project.entities.Book;
+import com.project.entities.Car;
+import com.project.entities.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
-import com.project.entities.*;
+
+import java.util.Properties;
+
 public class HibernateUtilConfig {
 
     private static SessionFactory sessionFactory;
 
 
-    public static SessionFactory getSessionFactory(){
-        if(sessionFactory == null){
-            try{
+    public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            try {
                 Configuration configuration = new Configuration();
 
                 // Hibernate settings equivalent to hibernate.cfg.xml's properties
@@ -42,7 +45,7 @@ public class HibernateUtilConfig {
                         .applySettings(configuration.getProperties()).build();
 
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

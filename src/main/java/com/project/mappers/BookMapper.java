@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Component
 public class BookMapper {
 
-    public BookDTO fromBookToBookDTO(Book book){
+    public BookDTO fromBookToBookDTO(Book book) {
         CarMapper carMapper = new CarMapper();
         UserMapper userMapper = new UserMapper();
 
@@ -25,9 +25,9 @@ public class BookMapper {
         Boolean valid = book.getValid();
 
         UserDTO userDTO = userMapper.fromUserToDto(user);
-        CarDTO carDTO =  carMapper.fromCarToCarDTO(car);
+        CarDTO carDTO = carMapper.fromCarToCarDTO(car);
 
-        return new BookDTO(id,userDTO,carDTO,startDate,endDate,valid);
+        return new BookDTO(id, userDTO, carDTO, startDate, endDate, valid);
 
     }
 }

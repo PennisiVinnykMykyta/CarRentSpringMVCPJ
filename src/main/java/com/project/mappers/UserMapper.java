@@ -14,7 +14,8 @@ import java.util.List;
 @Component
 public class UserMapper {
     private final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-    public UserDTO fromUserToDto(User user){
+
+    public UserDTO fromUserToDto(User user) {
 
         String id = Integer.toString(user.getId());
         String firstName = user.getFirstName();
@@ -23,14 +24,14 @@ public class UserMapper {
         String password = user.getPassword();
         String brithDate = format.format(user.getBirthDate());
         String userType;
-        if(user.getType() == UserType.ADMIN){
+        if (user.getType() == UserType.ADMIN) {
             userType = "admin";
-        }else{
+        } else {
             userType = "customer";
         }
-        List <Book> bookList = user.getBookings();
+        List<Book> bookList = user.getBookings();
 
-        return new UserDTO(id,firstName,lastName,email,password,userType,brithDate,bookList);
+        return new UserDTO(id, firstName, lastName, email, password, userType, brithDate, bookList);
 
     }
 
@@ -44,13 +45,13 @@ public class UserMapper {
         Date brithDate = format.parse(userDTO.getBirthDate());
         UserType userType;
 
-        if(userDTO.getUserType().equals("admin")){
+        if (userDTO.getUserType().equals("admin")) {
             userType = UserType.ADMIN;
-        }else{
+        } else {
             userType = UserType.CUSTOMER;
         }
 
-        return new User(id,firstName,lastName,email,password,userType,brithDate);
+        return new User(id, firstName, lastName, email, password, userType, brithDate);
 
     }
 

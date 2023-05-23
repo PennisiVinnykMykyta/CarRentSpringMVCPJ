@@ -20,7 +20,7 @@
 </form>
 
 <table class="table table-bordered table-striped table-condensed ">
-    <tr  class="info">
+    <tr class="info">
         <th>
             <p class="text-center">Booking ID</p>
         </th>

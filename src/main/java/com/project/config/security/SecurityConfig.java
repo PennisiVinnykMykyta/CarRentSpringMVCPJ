@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     PasswordEncoder passwordEncoder;
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(pjUserDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder);
@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //admin | User
 
     @Override
-    public void configure(final HttpSecurity httpSecurity) throws Exception{
+    public void configure(final HttpSecurity httpSecurity) throws Exception {
         //vede quale metodo per ottenere dettaglio degli utenti e quale codificatore stiamo utilizzando
         httpSecurity
                 .authorizeRequests()
@@ -68,18 +68,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(USER_ANY_MATCHER).access("hasAnyRole('CUSTOMER','ADMIN')")
                 .antMatchers(ADMIN_URL_MATCHER).hasRole("ADMIN")
                 .and()
-                 .formLogin()
-                 .loginPage("/login")
-                 .loginProcessingUrl("/login")
-                   .failureUrl("/login?error")
-                     .usernameParameter("email")                //nomi dei parametri
-                     .passwordParameter("password")
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .failureUrl("/login?error")
+                .usernameParameter("email")                //nomi dei parametri
+                .passwordParameter("password")
                 .and()
-                   .exceptionHandling()
-                   .accessDeniedPage("/login?forbidden")
+                .exceptionHandling()
+                .accessDeniedPage("/login?forbidden")
                 .and()
-                  .logout()
-                  .logoutUrl("/login?logout");
+                .logout()
+                .logoutUrl("/login?logout");
     }
 
     @Bean

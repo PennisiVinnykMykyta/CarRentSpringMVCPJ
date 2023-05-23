@@ -26,7 +26,7 @@
     <h3>NumberPlate:</h3> <form:input path="numberPlate" />
     <br><br>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-    <input type="submit"  class="btn btn-success" value="Add New Car"/>
+    <input type="submit" class="btn btn-success" value="Add New Car"/>
 
 </form:form>
 

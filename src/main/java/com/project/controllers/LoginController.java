@@ -13,8 +13,8 @@ public class LoginController {
         return "redirect:/user/loggedIn";
     }
 
-   @RequestMapping(value = {"/login"} ,method = RequestMethod.GET)
-    public String loginPageReload(){
+    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+    public String loginPageReload() {
         return "login";
     }
 

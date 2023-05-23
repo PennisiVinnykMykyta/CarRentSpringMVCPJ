@@ -50,7 +50,8 @@ public class Car implements Serializable {
         this.brand = brand;
     }
 
-    public Car(){}
+    public Car() {
+    }
 
     public int getId() {
         return id;

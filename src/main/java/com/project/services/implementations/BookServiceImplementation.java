@@ -33,77 +33,78 @@ public class BookServiceImplementation implements BookService {
     @Autowired
     private UserRepository userRepository;
 
-    public String checkDates(String start, String end){
+    public String checkDates(String start, String end) {
 
-        if(!start.isEmpty() && !end.isEmpty()){
+        if (!start.isEmpty() && !end.isEmpty()) {
             LocalDate startDate = LocalDate.parse(start);
             LocalDate endDate = LocalDate.parse(end);
 
-            if(startDate.isAfter(endDate)){
+            if (startDate.isAfter(endDate)) {
                 return "Error: starting date cannot be after drop-off date";
-            }else if(startDate.isBefore(LocalDate.now().plusDays(2))){
+            } else if (startDate.isBefore(LocalDate.now().plusDays(2))) {
                 return "Error: starting date must be selected at least 2 days prior to the current date";
-            }else{
+            } else {
                 return "";
             }
 
-        }else{
+        } else {
             return "Error: both dates need to be selected";
         }
     }
 
     @Override
-    public String errorCheck(String error){
-        if(error.equals("")){
+    public String errorCheck(String error) {
+        if (error.equals("")) {
             return "availableCars";
-        }else{
+        } else {
             return "addBook";
         }
     }
 
-    public BookServiceImplementation(){
+    public BookServiceImplementation() {
     }
 
 
     @Override
-    public List<BookDTO> findAllUserBooks(int userID){
+    public List<BookDTO> findAllUserBooks(int userID) {
         User user = userRepository.findById(userID);
         List<Book> bookList = user.getBookings();
         List<BookDTO> bookDTOList = new ArrayList<>();
-        for(Book book : bookList){
+        for (Book book : bookList) {
             BookDTO bookDTO = bookMapper.fromBookToBookDTO(book);
             bookDTOList.add(bookDTO);
         }
-        return  bookDTOList;
+        return bookDTOList;
     }
+
     @Override
-    public BookDTO findBookById(int id){
+    public BookDTO findBookById(int id) {
         Book book = bookRepository.findById(id);
         return bookMapper.fromBookToBookDTO(book);
     }
 
     @Override
-    public List<BookDTO> findAllBooks(){
+    public List<BookDTO> findAllBooks() {
         List<Book> bookList = bookRepository.findAll();
         List<BookDTO> bookDTOList = new ArrayList<>();
-        if(bookList != null){
-            for(Book book : bookList){
+        if (bookList != null) {
+            for (Book book : bookList) {
                 BookDTO bookDTO = bookMapper.fromBookToBookDTO(book);
                 bookDTOList.add(bookDTO);
             }
         }
-        return  bookDTOList;
+        return bookDTOList;
     }
 
     @Override
-    public List<CarDTO> getConflictingBookings(String start, String end){
-        if(start.isEmpty()){
+    public List<CarDTO> getConflictingBookings(String start, String end) {
+        if (start.isEmpty()) {
             return null;
-        }else{
+        } else {
             LocalDate startDate = LocalDate.parse(start);
             LocalDate endDate = LocalDate.parse(end);
 
-            List<Book> conflictingBookings = bookRepository.conflictingBookings(startDate,endDate);
+            List<Book> conflictingBookings = bookRepository.conflictingBookings(startDate, endDate);
 
             int carID;
             List<Integer> bookedCarsIDS = new ArrayList<>();
@@ -113,12 +114,12 @@ public class BookServiceImplementation implements BookService {
                 bookedCarsIDS.add(carID);
             }
 
-            return  carService.availableCars(bookedCarsIDS);
+            return carService.availableCars(bookedCarsIDS);
         }
     }
 
     @Override
-    public void acceptBooking(int id){
+    public void acceptBooking(int id) {
         Book book = bookRepository.findById(id);
         book.setValid(true);
         bookRepository.saveOrUpdateBook(book);
@@ -126,33 +127,34 @@ public class BookServiceImplementation implements BookService {
     }
 
     @Override
-    public void deleteById(int id){
+    public void deleteById(int id) {
         bookRepository.deleteById(id);
     }
 
     @Override
-    public void deleteAllUserBookings(int deleteID){
+    public void deleteAllUserBookings(int deleteID) {
         User user = userRepository.findById(deleteID);
         List<Book> bookList = user.getBookings();
-        if(bookList != null){
-            for(Book book : bookList){
+        if (bookList != null) {
+            for (Book book : bookList) {
                 bookRepository.deleteById(book.getId());
             }
         }
     }
+
     @Override
-    public void saveOrUpdateBook(int userID,int carID,String bookID, String startDate,String endDate){
+    public void saveOrUpdateBook(int userID, int carID, String bookID, String startDate, String endDate) {
         Book book;
         User user = userRepository.findById(userID);
         Car car = carRepository.findById(carID);
         LocalDate start = LocalDate.parse(startDate);
         LocalDate end = LocalDate.parse(endDate);
 
-        if(bookID.isEmpty()){
-            book = new Book(user,car,start,end);
-        }else{
+        if (bookID.isEmpty()) {
+            book = new Book(user, car, start, end);
+        } else {
             Integer id = Integer.parseInt(bookID);
-            book = new Book(id,user,car,start,end);
+            book = new Book(id, user, car, start, end);
         }
         bookRepository.saveOrUpdateBook(book);
     }

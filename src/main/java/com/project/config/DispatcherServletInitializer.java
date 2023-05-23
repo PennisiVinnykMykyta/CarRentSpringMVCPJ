@@ -12,7 +12,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{
                 //indica la classe di configurazione generale
-          WebApplicationContextConfig.class
+                WebApplicationContextConfig.class
         };
     }
 
@@ -20,6 +20,6 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
     protected String[] getServletMappings() {
         // si assicura che qualsiasi chiamata che viene inserita verrà gestita dal dispatche rservlet
 
-        return new String[] {"/"};
+        return new String[]{"/"};
     }
 }

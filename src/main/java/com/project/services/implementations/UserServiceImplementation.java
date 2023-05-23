@@ -19,51 +19,51 @@ import java.util.List;
 @Service
 public class UserServiceImplementation implements UserService {
 
-   @Autowired
-   private UserRepository userRepository;
-   @Autowired
-   private UserMapper userMapper;
-   @Autowired
-   private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-   @Override
-    public String getUserHomepage(String email){
+    @Override
+    public String getUserHomepage(String email) {
         User user = userRepository.findByEmail(email);
 
-        if(user.getType() == UserType.ADMIN){
-            return  "adminHomepage";
-        }else{
-            return  "customerHomepage";
+        if (user.getType() == UserType.ADMIN) {
+            return "adminHomepage";
+        } else {
+            return "customerHomepage";
         }
     }
 
     @Override
-    public UserDTO getUserById(int id){
+    public UserDTO getUserById(int id) {
         User user = userRepository.findById(id);
         return userMapper.fromUserToDto(user);
     }
 
     @Override
-    public UserDTO getUserByCredentials(String mail){
-        User user  = userRepository.findByEmail(mail);
-        if(user != null){
+    public UserDTO getUserByCredentials(String mail) {
+        User user = userRepository.findByEmail(mail);
+        if (user != null) {
             return userMapper.fromUserToDto(user);
         }
         return null;
     }
 
-    public List<UserDTO> getAllUsers(){ //CHANGE TO LIST DTO
+    public List<UserDTO> getAllUsers() { //CHANGE TO LIST DTO
 
         List<User> userList = userRepository.findAll();
         List<UserDTO> userDTOList = new ArrayList<>();
-        for(User user : userList){
+        for (User user : userList) {
             UserDTO userDTO = userMapper.fromUserToDto(user);
             userDTOList.add(userDTO);
         }
-        return  userDTOList;
+        return userDTOList;
     }
 
-    public String deleteUserById(int deleteID){
+    public String deleteUserById(int deleteID) {
 
         userRepository.deleteById(deleteID);
 
@@ -75,17 +75,17 @@ public class UserServiceImplementation implements UserService {
 
         Integer id;
 
-        if(userToChange.getId() == null || userToChange.getId().isEmpty()){
+        if (userToChange.getId() == null || userToChange.getId().isEmpty()) {
             id = null;
-        }else{
-             id = Integer.parseInt(userToChange.getId());
+        } else {
+            id = Integer.parseInt(userToChange.getId());
         }
 
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Date birthDate;
-        try{
+        try {
             birthDate = format.parse(userToChange.getBirthDate());
-        }catch (Exception e) {
+        } catch (Exception e) {
             return "parsingError";
         }
 
@@ -95,17 +95,17 @@ public class UserServiceImplementation implements UserService {
 
         UserType role;
 
-        if(type.equals("customer")){
+        if (type.equals("customer")) {
             role = UserType.CUSTOMER;
-        }else{
+        } else {
             role = UserType.ADMIN;
         }
 
-        user = new User(id,userToChange.getEmail(),password,userToChange.getFirstName(),userToChange.getLastName(),role,birthDate);
+        user = new User(id, userToChange.getEmail(), password, userToChange.getFirstName(), userToChange.getLastName(), role, birthDate);
 
         userRepository.saveOrUpdateUser(user);
 
-         return "redirect:/user/homepage";
+        return "redirect:/user/homepage";
 
     }
 
