@@ -46,7 +46,7 @@
                     ${book.user.email}
             </td>
             <td>
-                    ${book.car.model} ${book.car.brand} ${book.car.color}
+                    ${book.car.brand} ${book.car.model} ${book.car.color}
             </td>
             <td>
                     ${book.startDate}

@@ -25,13 +25,11 @@ public class UserController {
 
     @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
     public String deleteUser(HttpServletRequest request, Model model){
-        int userID = Integer.parseInt(request.getParameter("userID"));
+
         int deleteID = Integer.parseInt(request.getParameter("deleteID"));
         bookService.deleteAllUserBookings(deleteID);
         String page = userService.deleteUserById(deleteID);
 
-        UserDTO userDTO = userService.getUserById(userID);
-        model.addAttribute("user",userDTO);
         List<UserDTO> userList = userService.getAllUsers();
         model.addAttribute("userList", userList);
 
@@ -39,11 +37,9 @@ public class UserController {
     }
 
     @RequestMapping(value ="/userList", method = RequestMethod.GET)
-    public String userList(HttpServletRequest request, Model model){
-        int userID = Integer.parseInt(request.getParameter("userID"));
-        UserDTO userDTO = userService.getUserById(userID);
+    public String userList(Model model){
+
         List<UserDTO> userList = userService.getAllUsers();
-        model.addAttribute("user",userDTO);
         model.addAttribute("userList",userList);
         return "userList";
     }
@@ -65,12 +61,11 @@ public class UserController {
 
     @RequestMapping(value = "/changeProfile", method = RequestMethod.POST)
     public String changeProfile(HttpServletRequest request, Model model){
-        int userID = Integer.parseInt(request.getParameter("userID")); //se stiamo modifcando il nostro profilo entrambi gli id coincidono
+
         int userToChangeID = Integer.parseInt(request.getParameter("userToChangeID"));
-        UserDTO userDTO = userService.getUserById(userID);
         UserDTO userToChangeDTO = userService.getUserById(userToChangeID);
-        model.addAttribute("user",userDTO);
         model.addAttribute("userToChange",userToChangeDTO);
+
         return "changeProfile";
     }
 
@@ -104,5 +99,4 @@ public class UserController {
         return userService.saveOrUpdateUser(userToChange);
 
     }
-
 }

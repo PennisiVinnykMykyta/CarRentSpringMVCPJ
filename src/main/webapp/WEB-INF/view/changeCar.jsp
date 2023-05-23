@@ -28,7 +28,6 @@
   <br>
   <form:hidden path="id" />
 
-  <input type="hidden" name="email" value="${user.email}" />
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
   <input type="submit" value="Submit" />
 </form:form>

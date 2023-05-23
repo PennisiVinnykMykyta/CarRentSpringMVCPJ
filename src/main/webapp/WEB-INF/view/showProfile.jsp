@@ -21,7 +21,6 @@ Birthday: ${user.birthDate}
 <br><br>
 
 <form method="POST" action="./changeProfile">
-    <input type="hidden" name="userID" value="${user.id}">
     <input type="hidden" name="userToChangeID" value="${user.id}">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <input type="submit" value="Change Profile Details">

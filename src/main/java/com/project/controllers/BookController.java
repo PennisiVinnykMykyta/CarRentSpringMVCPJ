@@ -2,9 +2,7 @@ package com.project.controllers;
 
 import com.project.dto.BookDTO;
 import com.project.dto.CarDTO;
-import com.project.dto.UserDTO;
 import com.project.services.BookService;
-import com.project.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,14 +19,11 @@ import java.util.List;
 public class BookController {
     @Autowired
     BookService bookService;
-    @Autowired
-    UserService userService;
 
     @RequestMapping(value= "/bookList" , method = RequestMethod.GET)
     public String bookList(HttpServletRequest request, Model model){
+        model.addAttribute("userID",request.getParameter("userID"));
         int userID = Integer.parseInt(request.getParameter("userID"));
-        UserDTO userDTO = userService.getUserById(userID);
-        model.addAttribute("user",userDTO);
         List<BookDTO> bookList = bookService.findAllUserBooks(userID);
         model.addAttribute("bookList",bookList);
 
@@ -37,8 +32,6 @@ public class BookController {
 
     @PostMapping(value = "/acceptBooking")
     public String acceptBooking(HttpServletRequest request, Model model){
-        UserDTO userDTO = userService.getUserById(Integer.parseInt(request.getParameter("userID")));
-        model.addAttribute("user", userDTO);
 
         bookService.acceptBooking(Integer.parseInt(request.getParameter("bookID")));
 
@@ -50,6 +43,7 @@ public class BookController {
     @GetMapping(value = "/addBook")
     public String bookForm(HttpServletRequest request, Model model){
 
+        model.addAttribute("userID",request.getParameter("userID"));
         model.addAttribute("bookID",request.getParameter("bookID"));
 
         return "addBook";
@@ -57,6 +51,9 @@ public class BookController {
 
     @PostMapping(value = "/selectCar")
     public String carSelection(HttpServletRequest request, Model model){
+        int userID = Integer.parseInt(request.getParameter("userID"));
+        model.addAttribute("userID",userID);
+
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
 
@@ -77,7 +74,6 @@ public class BookController {
     @PostMapping(value="/saveOrUpdateBook")
     public String saveOrChangeBook(HttpServletRequest request){
         int userID = Integer.parseInt(request.getParameter("userID"));
-        UserDTO userDTO = userService.getUserById(userID);
 
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
@@ -87,14 +83,11 @@ public class BookController {
 
         bookService.saveOrUpdateBook(userID,carID,bookID,startDate,endDate);
 
-
         return "redirect:/user/homepage";
     }
 
     @RequestMapping(value= "/globalBookList" , method = RequestMethod.GET)
-    public String globalBookList(HttpServletRequest request, Model model){
-        UserDTO userDTO = userService.getUserById(Integer.parseInt(request.getParameter("userID")));
-        model.addAttribute("user",userDTO);
+    public String globalBookList(Model model){
 
         List<BookDTO> bookList = bookService.findAllBooks();
         model.addAttribute("bookList",bookList);
@@ -108,20 +101,19 @@ public class BookController {
         int bookID = Integer.parseInt(request.getParameter("deleteID"));
         bookService.deleteById(bookID);
 
-        UserDTO userDTO = userService.getUserById(Integer.parseInt(request.getParameter("userID")));
+        int userID = Integer.parseInt(request.getParameter("userID"));
+        List<BookDTO> bookList = bookService.findAllUserBooks(userID);
 
-        model.addAttribute("user",userDTO);
-        model.addAttribute("bookList",userDTO.getBookList());
+        model.addAttribute("userID",userID);
+        model.addAttribute("bookList",bookList);
         return "bookList";
     }
     @PostMapping(value="/deleteGlobal")
     public String deleteBookGlobal(HttpServletRequest request, Model model){
-        UserDTO userDTO = userService.getUserById(Integer.parseInt(request.getParameter("userID")));
 
         int bookID = Integer.parseInt(request.getParameter("deleteID"));
         bookService.deleteById(bookID);
 
-        model.addAttribute("user",userDTO);
         model.addAttribute("bookList",bookService.findAllBooks());
         return "globalBookList";
     }

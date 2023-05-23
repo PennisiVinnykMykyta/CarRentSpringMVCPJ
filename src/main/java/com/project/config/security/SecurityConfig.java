@@ -80,8 +80,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                   .logout()
                   .logoutUrl("/login?logout");
-              /*.and()
-                .csrf().disable(); //disattivare piu tardi*/
     }
 
     @Bean

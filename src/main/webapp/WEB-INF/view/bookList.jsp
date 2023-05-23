@@ -44,7 +44,7 @@
                     ${book.user.email}
             </td>
             <td>
-                    ${book.car.model} ${book.car.brand} ${book.car.color}
+                    ${book.car.brand} ${book.car.model} ${book.car.color}
             </td>
             <td>
                     ${book.startDate}
@@ -57,11 +57,13 @@
             </td>
             <td>
                 <form action="/SpringMVCPJ_war_exploded/book/addBook" method="GET">
+                    <input type="hidden" name="userID" value="${userID}">
                     <input type="hidden" name="bookID" value="${book.id}">
                     <input type="submit" value="Modify Booking">
                 </form>
 
                 <form action="./deleteLocal" method="POST">
+                    <input type="hidden" name="userID" value="${userID}">
                     <input type="hidden" name="deleteID" value="${book.id}">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <input type="submit" value="Delete Booking">

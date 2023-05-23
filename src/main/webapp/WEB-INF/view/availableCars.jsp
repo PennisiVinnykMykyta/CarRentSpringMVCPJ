@@ -11,6 +11,15 @@
 </form>
 
 <h3>Please select the vehicle you'd look to book from the list below:</h3>
+
+<form action="./saveOrUpdateBook" method="POST">
+
+    <input type="hidden" name="startDate" value="${startDate}"/>
+    <input type="hidden" name="endDate" value="${endDate}"/>
+    <input type="hidden" name="userID" value="${userID}"/>
+    <input type="hidden" name="bookID" value="${bookID}"/>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+
 <table border="1px">
     <tr>
         <th>
@@ -39,19 +48,13 @@
                     ${car.color}
             </td>
             <td>
-                <form action="./saveOrUpdateBook" method="POST">
-                    <input type="hidden" name="startDate" value="${startDate}"/>
-                    <input type="hidden" name="endDate" value="${endDate}"/>
-                    <input type="hidden" name="carID" value="${car.id}"/>
-                    <input type="hidden" name="userID" value="${user.id}"/>
-                    <input type="hidden" name="bookID" value="${bookID}"/>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                    <input type="submit" value="<-- Book This Vehicle"/>
-                </form>
+                <input type="hidden" name="carID" value="${car.id}"/>
+                <input type="submit" value="<-- Book This Vehicle"/>
             </td>
         </tr>
     </c:forEach>
 </table>
+</form>
 
 </body>
 </html>

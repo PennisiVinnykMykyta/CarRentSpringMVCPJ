@@ -16,6 +16,7 @@ ${error}
     <input type="date" name="endDate" />
     <br><br>
     <input type="hidden" name="bookID"  value="${bookID}">
+    <input type="hidden" name="userID"  value="${userID}">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <input type="submit" value="Continue">
 </form>
